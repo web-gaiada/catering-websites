@@ -421,10 +421,19 @@ a:hover .luxury-icon { opacity: 1; }
 .luxury-header__link[aria-current="page"]:hover::after { transform: translateX(-50%) scaleX(0); opacity: 0; }
 /* HOVER (default only): weight unchanged — only the center line reveals. */
 .luxury-header__link:not([aria-current="page"]):hover::after { transform: translateX(-50%) scaleX(1); opacity: 1; }
-.luxury-header__actions { display: flex; align-items: center; justify-content: flex-end; justify-self: end; grid-column: 3; gap: var(--space-20); }
+.luxury-header__actions { display: flex; align-items: center; justify-content: center; justify-self: center; grid-column: 3; gap: var(--space-20); }
 .luxury-header__actions .luxury-btn { width: var(--cta-width); }   /* tokenized CTA width — no sub-pixel */
 /* Social icon sits at full opacity to match the nav links (not the muted 60%). */
 .luxury-header__actions .luxury-icon { opacity: 1; }
+
+/* Narrower desktops (~1280): the longest wordmark ("Bali Yacht Provisioning")
+   crowds the centered nav. Tighten the wordmark tracking + nav rhythm in this
+   band so the title clears the menu. Below 1025px the nav collapses to the
+   drawer, so this only targets the visible-nav desktop range. */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .luxury-header__logo-word { letter-spacing: 0.06em; }
+  .luxury-header__nav { gap: var(--space-40); }   /* 40px, down from 55px */
+}
 
 /* ---------------------------------------------------------------------
    HAMBURGER + SLIDE-OUT DRAWER (≤1024px) — desktop hides all of this

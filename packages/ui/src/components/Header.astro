@@ -55,6 +55,7 @@ const headerClasses = [
       }
     </nav>
     <div class="luxury-header__actions">
+      <a class="luxury-btn luxury-btn--ghost luxury-btn--md" href={cta.href}>{cta.label}</a>
       {
         brand.social.map((s) => (
           <a class="luxury-icon-btn" href={s.href} aria-label={s.label}>
@@ -64,7 +65,6 @@ const headerClasses = [
           </a>
         ))
       }
-      <a class="luxury-btn luxury-btn--ghost luxury-btn--md" href={cta.href}>{cta.label}</a>
     </div>
     <button type="button" class="luxury-header__burger" aria-label="Open menu" aria-expanded="false" data-nav-open>
       <span class="luxury-header__burger-bars" aria-hidden="true"></span>
