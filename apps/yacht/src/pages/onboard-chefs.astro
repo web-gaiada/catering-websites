@@ -1,0 +1,186 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import ImagePlate from "@bali/ui/components/ImagePlate.astro";
+import SisterBrands from "@bali/ui/components/SisterBrands.astro";
+import { yacht, yachtGeo } from "../brand";
+import { img } from "../lib/images";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Onboard yacht chefs and marine hospitality staffing",
+    name: "Elite Onboard Chefs & Luxury Yacht Staffing",
+    description:
+      "Professional private chefs, mixologists and five-star service crew for private yacht charters in Bali.",
+    areaServed: "Bali — charter vessels and superyachts",
+    provider: { "@type": "FoodEstablishment", name: "Bali Yacht Catering", url: "https://baliyachtcatering.com" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Can you crew a multi-day charter?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. We supply chefs and service staff for day charters through to multi-day itineraries, scaled to the vessel and guest count.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do your chefs work in any galley?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Our chefs are experienced in compact marine galleys and plan menus and provisioning around the equipment and space available.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can we keep the same chef across charters?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Where schedules allow, we assign a consistent chef and crew so service and preferences carry over between charters.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you provision as well as cook?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. We source and provision all ingredients, or coordinate directly with your provisioner and chief stewardess.",
+        },
+      },
+    ],
+  },
+];
+---
+
+<PageLayout
+  brand={yacht}
+  current="chefs"
+  title="Onboard Yacht Chefs & VIP Marine Service | Bali"
+  description="Hire professional private chefs, mixologists, and elite service staff for your next Bali yacht charter. Five-star hospitality tailored for private vessels."
+  canonical="https://baliyachtcatering.com/onboard-chefs"
+  geo={yachtGeo}
+  jsonLd={jsonLd}
+>
+  <section class="jc-hero section-tone--dark" data-screen-label="Yacht · Onboard Chefs" style="min-height:74vh;">
+    <ImagePlate hero image={img("yacht-chefs-hero")} caption="Chef plating onboard / crew service" />
+    <div class="jc-hero__scrim"></div>
+    <div class="jc-hero__inner">
+      <div class="jc-hero__col">
+        <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Onboard Chefs & Marine Staffing</span>
+        <h1 class="type-h1" style="font-size:clamp(38px,5vw,62px); line-height:1.05; max-width:18ch;">Elite Onboard Chefs & Luxury Yacht Staffing</h1>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:60ch;">Professional chefs, mixologists and service crew who bring restaurant standards to the galley — and five-star hospitality to the deck.</p>
+        <div style="display:flex; gap:20px; margin-top:50px; flex-wrap:wrap;">
+          <a class="luxury-btn luxury-btn--solid luxury-btn--md" href="/booking">Request a Quote</a>
+          <a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/menus">View Menus</a>
+        </div>
+        <div class="jc-meta" style="margin-top:50px;">
+          <span class="type-eyebrow">Private Chefs</span>
+          <span class="type-eyebrow dot">/</span>
+          <span class="type-eyebrow">Mixologists</span>
+          <span class="type-eyebrow dot">/</span>
+          <span class="type-eyebrow">Service Crew</span>
+          <span class="type-eyebrow dot">/</span>
+          <span class="type-eyebrow">Full Provisioning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Five-Star Marine Hospitality Professionals</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:22ch;">A crew matched to your charter</h2>
+    <p class="type-body-lg" style="margin:30px 0 60px; max-width:64ch;">We assemble the right team for the vessel and the occasion — then handle the menu, the provisioning and the service, so you simply enjoy the day.</p>
+    <div class="jc-steps">
+      <div>
+        <span class="jc-step__n">01</span>
+        <h3 class="type-h3" style="margin:20px 0 0; font-size:22px;">Brief & Match</h3>
+        <p class="type-body-md" style="margin:12px 0 0; opacity:0.78;">Share the vessel, route and guest profile; we match a chef and crew to suit.</p>
+      </div>
+      <div>
+        <span class="jc-step__n">02</span>
+        <h3 class="type-h3" style="margin:20px 0 0; font-size:22px;">Menu & Provision</h3>
+        <p class="type-body-md" style="margin:12px 0 0; opacity:0.78;">Your chef develops the menu and we provision every ingredient, fresh and sourced.</p>
+      </div>
+      <div>
+        <span class="jc-step__n">03</span>
+        <h3 class="type-h3" style="margin:20px 0 0; font-size:22px;">Serve Underway</h3>
+        <p class="type-body-md" style="margin:12px 0 0; opacity:0.78;">The team boards, runs the galley and serves with polish — then leaves it spotless.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--tint Section">
+    <div class="jc-split">
+      <div class="jc-split--text">
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">Custom Menu Development by Award-Winning Culinary Artists</span>
+        <h2 class="type-h2" style="margin:20px 0 0;">Menus designed for your vessel</h2>
+        <p class="type-body-md" style="margin:30px 0 0;">Our chefs develop bespoke menus around your preferences, the galley and the route — balancing show-stopping plating with what cooks beautifully at sea. Tastings and refinements are part of the process for longer charters.</p>
+        <div style="margin-top:40px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/booking">Develop a Menu</a></div>
+      </div>
+      <ImagePlate image={img("yacht-chefs-plate1")} caption="Chef / galley / plating detail" ratio="4 / 3" />
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Seamless Galley Execution Underway</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:24ch;">The full team, on deck</h2>
+    <div class="luxury-card-grid" style="--cols:3; margin-top:50px;">
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Private Chefs</h3>
+        <p class="luxury-card__body">Award-winning chefs who cook in compact galleys without compromise — from breakfast at anchor to a plated dinner.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/booking">Hire a Chef</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Mixologists & Bar</h3>
+        <p class="luxury-card__body">Professional bartenders and a marine mixology programme — signature cocktails built for the cruise and the sunset.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/menus">Bar Service</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Service & Hospitality Crew</h3>
+        <p class="luxury-card__body">Discreet, polished stewards and service staff for seamless five-star hospitality from boarding to disembarkation.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/booking">Request Crew</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-tone--dark Section" style="text-align:center;">
+    <span class="type-eyebrow" style="display:block; opacity:0.82;">The Standard</span>
+    <h2 class="type-h2" style="font-size:clamp(28px,4vw,46px); line-height:1.12; max-width:24ch; margin:30px auto 0;">Restaurant standards, in a galley the size of a corridor.</h2>
+    <p class="type-body-lg" style="opacity:0.82; max-width:58ch; margin:30px auto 0;">Our chefs and crew are chosen for marine experience as much as talent — calm, precise and five-star, whatever the conditions.</p>
+    <div style="margin-top:50px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/booking">Book Your Crew</a></div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Answers</span>
+    <h2 class="type-h2" style="margin:20px 0 40px;">Staffing questions</h2>
+    <div class="jc-faq">
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Can you crew a multi-day charter?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Yes. We supply chefs and service staff for day charters through to multi-day itineraries, scaled to the vessel and guest count.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Do your chefs work in any galley?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Our chefs are experienced in compact marine galleys and plan menus and provisioning around the equipment and space available.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Can we keep the same chef across charters?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Where schedules allow, we assign a consistent chef and crew so service and preferences carry over between charters.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Do you provision as well as cook?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Yes. We source and provision all ingredients, or coordinate directly with your provisioner and chief stewardess.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <SisterBrands
+    current="yacht"
+    heading="Flying private or running a superyacht?"
+    intro="Our sister brands deliver the same standard in the air and at the dock."
+  />
+</PageLayout>

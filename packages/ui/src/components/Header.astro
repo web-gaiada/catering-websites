@@ -1,0 +1,128 @@
+---
+/* =====================================================================
+   Header — shared across all brand sites; themed per brand by the Brand
+   config. Renders the 80px overlay bar, desktop nav, CTA, and the mobile
+   hamburger + slide-out drawer. The scroll engine (transparent → solid on
+   scroll) and the drawer open/close live in the bundled client script below —
+   the DC source expressed these via a React DCLogic component.
+   ===================================================================== */
+import type { Brand } from "../brand";
+
+export interface Props {
+  brand: Brand;
+  /** Nav key of the current page (for aria-current). */
+  current: string;
+  /** Optional CTA override (e.g. "Call Dispatch" on the contact page). */
+  cta?: { label: string; href: string };
+  /** Transparent overlay bar over an immersive hero (default true). */
+  overlay?: boolean;
+}
+const { brand, current, cta = brand.cta, overlay = true } = Astro.props;
+const headerClasses = [
+  "luxury-header",
+  "luxury-header--sticky",
+  overlay && "luxury-header--overlay",
+].filter(Boolean).join(" ");
+---
+<header class={headerClasses}>
+  <div class="luxury-header__inner">
+    <a class="luxury-header__brand" href="/">
+      <span class="luxury-header__logo-word">{brand.name}</span>
+    </a>
+    <nav class="luxury-header__nav" aria-label="Primary">
+      {
+        brand.nav.map((item) => (
+          <a
+            class="luxury-header__link"
+            href={item.href}
+            aria-current={item.key === current ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="luxury-header__actions">
+      <a class="luxury-btn luxury-btn--ghost luxury-btn--md" href={cta.href}>{cta.label}</a>
+    </div>
+    <button type="button" class="luxury-header__burger" aria-label="Open menu" aria-expanded="false" data-nav-open>
+      <span class="luxury-header__burger-bars" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<div class="luxury-nav" hidden data-nav-root>
+  <div class="luxury-nav-overlay" data-nav-close></div>
+  <div class="luxury-nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <button type="button" class="luxury-nav-drawer__close" aria-label="Close menu" data-nav-close>
+      <span style="font-family:var(--font-body); font-size:26px; line-height:1;">&times;</span>
+    </button>
+    <nav class="luxury-nav-drawer__links" aria-label="Mobile">
+      {
+        brand.nav.map((item) => (
+          <a
+            class="luxury-nav-drawer__link"
+            href={item.href}
+            aria-current={item.key === current ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="luxury-nav-drawer__actions">
+      <a class="luxury-btn luxury-btn--solid luxury-btn--md" href={cta.href}>{cta.label}</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Smart header + mobile drawer. Runs once per page (Header is included once).
+  (function () {
+    const header = document.querySelector<HTMLElement>(".luxury-header");
+    if (header) {
+      const onScroll = () =>
+        header.classList.toggle("is-scrolled", window.scrollY > 20);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
+
+    const root = document.querySelector<HTMLElement>("[data-nav-root]");
+    const overlay = root?.querySelector<HTMLElement>(".luxury-nav-overlay");
+    const drawer = root?.querySelector<HTMLElement>(".luxury-nav-drawer");
+    const burger = document.querySelector<HTMLElement>("[data-nav-open]");
+    if (!root || !overlay || !drawer || !burger) return;
+
+    let closeTimer: number | undefined;
+    const open = () => {
+      window.clearTimeout(closeTimer);
+      document.body.style.overflow = "hidden";
+      root.hidden = false;
+      burger.setAttribute("aria-expanded", "true");
+      // next frame so the slide/fade transition plays from the rest state
+      requestAnimationFrame(() => {
+        overlay.classList.add("is-open");
+        drawer.classList.add("is-open");
+      });
+    };
+    const close = () => {
+      document.body.style.overflow = "";
+      overlay.classList.remove("is-open");
+      drawer.classList.remove("is-open");
+      burger.setAttribute("aria-expanded", "false");
+      closeTimer = window.setTimeout(() => {
+        root.hidden = true;
+      }, 300);
+    };
+
+    burger.addEventListener("click", open);
+    root.querySelectorAll("[data-nav-close]").forEach((el) =>
+      el.addEventListener("click", close)
+    );
+    // Tapping a drawer link navigates; close so it isn't left open on return.
+    drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", close));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !root.hidden) close();
+    });
+  })();
+</script>

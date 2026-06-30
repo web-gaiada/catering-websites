@@ -1,0 +1,186 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import ImagePlate from "@bali/ui/components/ImagePlate.astro";
+import SisterBrands from "@bali/ui/components/SisterBrands.astro";
+import { yacht, yachtGeo } from "../brand";
+import { img } from "../lib/images";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Menu",
+    name: "Bali Yacht Catering — Cruise & Event Menus",
+    description:
+      "Yacht catering menus for maritime environments: grazing platters, canapés, live seafood BBQ, fine dining manifests and premium beverage packages.",
+    url: "https://baliyachtcatering.com/menus",
+    inLanguage: "en",
+    provider: { "@type": "FoodEstablishment", name: "Bali Yacht Catering", url: "https://baliyachtcatering.com" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Can you cook a live BBQ onboard?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, where the vessel safely permits. Otherwise we deliver everything grill-ready and finish dockside before you depart.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do platters travel well in the heat?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Our platters are designed for the marine environment — packed chilled, styled to hold, and built to look as good at the last stop as the first.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can you build a custom fine-dining manifest?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Absolutely. We compose plated multi-course menus by request, matched to the vessel, the guests and the occasion.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you provide glassware, ice and bar equipment?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Open-bar packages include glassware, ice, mixers and an onboard mixologist where requested.",
+        },
+      },
+    ],
+  },
+];
+---
+
+<PageLayout
+  brand={yacht}
+  current="menus"
+  title="Yacht Event Menus | Luxury Canapés & Boat BBQ Bali"
+  description="Browse yacht catering menus designed perfectly for maritime environments. Gourmet platters, fresh seafood BBQs, high-end canapés, and premium open bars."
+  canonical="https://baliyachtcatering.com/menus"
+  geo={yachtGeo}
+  jsonLd={jsonLd}
+>
+  <section class="jc-hero section-tone--dark" data-screen-label="Yacht · Menus" style="min-height:74vh;">
+    <ImagePlate hero image={img("yacht-menus-hero")} caption="Seafood platter / BBQ on deck" />
+    <div class="jc-hero__scrim"></div>
+    <div class="jc-hero__inner">
+      <div class="jc-hero__col">
+        <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Cruise & Event Menus · Bali</span>
+        <h1 class="type-h1" style="font-size:clamp(38px,5vw,62px); line-height:1.05; max-width:18ch;">Gourmet Yacht Menus: Platters, Canapés & Seafood BBQs</h1>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:60ch;">Menus designed for the water — styled to share, built to hold in the heat, and easy to serve underway. Every selection is a starting point for something bespoke.</p>
+        <div style="display:flex; gap:20px; margin-top:50px; flex-wrap:wrap;">
+          <a class="luxury-btn luxury-btn--solid luxury-btn--md" href="/booking">Request a Quote</a>
+          <a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/onboard-chefs">Onboard Chefs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Luxury Platter Delivery for Day Cruises & Catamarans</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:22ch;">A menu styled for the sea</h2>
+    <p class="type-body-lg" style="margin:30px 0 50px; max-width:64ch;">Delivered dockside, ready to serve, and composed to look beautiful from the first anchorage to the last. Mix and match, or let our chefs build the full manifest.</p>
+    <div class="jc-list">
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Grazing Platters</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Charcuterie, artisan cheese, crudités and tropical fruit, styled generously for sharing on deck.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Canapés & Bites</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Seared tuna, prawn skewers, mini sliders and bruschetta — one-bite luxury made for cruising.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Seafood BBQ</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">A live grill of lobster, snapper, prawns and squid, with island sides and house sambals.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Mains & Fine Dining</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Plated courses at anchor — Wagyu, reef fish or a vegetarian tasting, composed to request.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Desserts & Fruit</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Tropical fruit carving, patisserie and chilled desserts that hold beautifully in the heat.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Beverage & Bar</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Champagne, wine, cocktails and fresh juices — a full open bar with onboard mixology.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--tint Section">
+    <div class="jc-split">
+      <ImagePlate image={img("yacht-menus-plate1")} caption="Live BBQ / plated fine dining at anchor" ratio="4 / 3" />
+      <div class="jc-split--text">
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">Live Onboard BBQ & Custom Fine Dining Manifests</span>
+        <h2 class="type-h2" style="margin:20px 0 0;">From a beach grill to a plated dinner</h2>
+        <p class="type-body-md" style="margin:30px 0 0;">Where the vessel allows, our chefs cook a live BBQ on deck or at a private beach stop. For celebrations, we build a full fine-dining manifest — multi-course, plated and served by professional crew.</p>
+        <div style="margin-top:40px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/booking">Design a Menu</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Premium Beverage Packages & Marine Mixology</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:24ch;">The bar, handled</h2>
+    <div class="luxury-card-grid" style="--cols:3; margin-top:50px;">
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Open Bar Packages</h3>
+        <p class="luxury-card__body">Champagne, wine, beer and spirits with glassware and ice, scaled cleanly to the guest count and the hours afloat.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/booking">Enquire</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Marine Mixology</h3>
+        <p class="luxury-card__body">A mobile cocktail bar and mixologist crafting signature drinks built for the cruise and the sunset.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/onboard-chefs">Onboard Bar</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Non-Alcoholic & Refreshments</h3>
+        <p class="luxury-card__body">Fresh juices, mocktails, young coconuts and chilled water kept flowing throughout the day on the water.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/booking">Request</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-tone--dark Section" style="text-align:center;">
+    <span class="type-eyebrow" style="display:block; opacity:0.82;">Marine-Ready</span>
+    <h2 class="type-h2" style="font-size:clamp(28px,4vw,46px); line-height:1.12; max-width:26ch; margin:30px auto 0;">Every menu is built to look and taste its best at sea.</h2>
+    <p class="type-body-lg" style="opacity:0.82; max-width:58ch; margin:30px auto 0;">Packed chilled, styled to hold and easy to serve underway — so the catering keeps pace with the day.</p>
+    <div style="margin-top:50px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/booking">Request a Quote</a></div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Answers</span>
+    <h2 class="type-h2" style="margin:20px 0 40px;">Menu questions</h2>
+    <div class="jc-faq">
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Can you cook a live BBQ onboard?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Yes, where the vessel safely permits. Otherwise we deliver everything grill-ready and finish dockside before you depart.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Do platters travel well in the heat?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Our platters are designed for the marine environment — packed chilled, styled to hold, and built to look as good at the last stop as the first.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Can you build a custom fine-dining manifest?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Absolutely. We compose plated multi-course menus by request, matched to the vessel, the guests and the occasion.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Do you provide glassware, ice and bar equipment?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Yes. Open-bar packages include glassware, ice, mixers and an onboard mixologist where requested.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <SisterBrands
+    current="yacht"
+    heading="Flying private or running a superyacht?"
+    intro="Our sister brands deliver the same standard in the air and at the dock."
+  />
+</PageLayout>

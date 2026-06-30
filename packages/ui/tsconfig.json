@@ -1,0 +1,13 @@
+{
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    // This package has no `astro.config` (it's a shared component library, not
+    // an app), so it never gets a synced `.astro/types.d.ts` to wire up the
+    // Astro JSX environment. Point JSX at Astro's runtime explicitly so the
+    // editor resolves `.astro` elements (JSX.IntrinsicElements) instead of
+    // flagging every tag.
+    "jsxImportSource": "astro"
+  },
+  "include": ["src", "src/env.d.ts"],
+  "exclude": ["dist"]
+}

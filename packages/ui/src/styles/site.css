@@ -1,0 +1,206 @@
+/* =====================================================================
+   site.css — shared page layer for the three Bali catering sites.
+   Composes ON TOP of the Luxury Minimalist design system (tokens +
+   components). Loaded after them so it can re-assert a few things the DS
+   authors for <button> elements but which we use on <a> navigation links.
+   ===================================================================== */
+
+body { margin: 0; background: var(--surface-page); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+summary::-webkit-details-marker { display: none; }
+img, svg { display: block; }
+
+/* ---------------------------------------------------------------------
+   Anchor-as-button adapter
+   The DS button color rules (.luxury-btn--solid / --ghost) are single-class
+   and are authored for <button>. On an <a> the UA link color (a:link, which
+   carries an element+pseudo and so out-specifies a lone class) wins, turning
+   our buttons link-blue. We re-assert the palette with one extra class of
+   specificity. Solid is context-free (always accent); ghost is scoped to the
+   page content (.site-main) with a dark-section override, leaving the DS's
+   own header/overlay/scrolled ghost handling untouched.
+   --------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+   Initial-mount flash guard
+   The DS .luxury-btn carries a color/background/border transition for its
+   hover states. On first paint the DC runtime briefly renders a bare <a>
+   (UA link blue / transparent) before the styled fill resolves, so that
+   transition animates blue→accent on every load. We hold transitions off
+   until the page flags itself ready (componentDidMount → rAF adds
+   html.is-ready), which suppresses the mount flash while preserving the
+   hover fades.
+   --------------------------------------------------------------------- */
+.luxury-btn { transition: none; }
+html.is-ready .luxury-btn {
+  transition: background-color var(--dur-base) var(--ease-luxury),
+              color var(--dur-base) var(--ease-luxury),
+              opacity var(--dur-base) var(--ease-luxury),
+              border-color var(--dur-base) var(--ease-luxury);
+}
+
+.luxury-btn.luxury-btn--solid { background: var(--accent); color: var(--text-on-accent); border-color: var(--accent); }
+.luxury-btn.luxury-btn--solid:hover { opacity: var(--opacity-fade); }
+.site-main .luxury-btn--ghost { color: var(--text-primary); border-color: var(--text-primary); background: transparent; }
+.site-main .luxury-btn--ghost:hover { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); opacity: var(--opacity-fade); }
+.site-main .section-tone--dark .luxury-btn--ghost { color: var(--surface-page); border-color: var(--surface-page); }
+.site-main .section-tone--dark .luxury-btn--ghost:hover { background: var(--surface-page); color: var(--text-primary); border-color: var(--surface-page); opacity: 1; }
+
+/* ---------------------------------------------------------------------
+   Hero — full-viewport immersive band behind the overlay header
+   --------------------------------------------------------------------- */
+.jc-hero { position: relative; min-height: 100vh; margin-top: calc(var(--header-height) * -1); display: flex; align-items: center; overflow: hidden; }
+/* The DC runtime drops the `class` attr off the <image-slot> custom element,
+   so .jc-hero__bg never matches. Target the hero slot structurally instead. */
+.jc-hero__bg, .jc-hero > image-slot { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Directional gradient scrim: darkest under the left-aligned text column for
+   legibility, clearing toward the right so the hero image actually reads.
+   (A photo-overlay gradient, not a content-surface gradient.) */
+.jc-hero__scrim { position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(16,15,13,0.78) 0%, rgba(16,15,13,0.62) 38%, rgba(16,15,13,0.40) 70%, rgba(16,15,13,0.30) 100%); }
+.jc-hero__scrim--soft {
+  background: linear-gradient(90deg, rgba(16,15,13,0.66) 0%, rgba(16,15,13,0.48) 42%, rgba(16,15,13,0.28) 80%, rgba(16,15,13,0.20) 100%); }
+.jc-hero__inner { position: relative; z-index: 2; width: 100%; padding: calc(var(--header-height) + 30px) var(--layout-gutter) 90px; }
+.jc-hero__col { max-width: 820px; }
+
+/* Inline editorial meta row (eyebrow facts separated by a faint slash) */
+.jc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+.jc-meta .dot { opacity: 0.3; }
+
+/* Two-column editorial split (text + image plate) */
+.jc-split { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+.jc-split--text { max-width: 540px; }
+.jc-split--narrow { grid-template-columns: 1.1fr 0.9fr; }
+
+/* Content image plates.
+   The <image-slot> shadow :host defaults to 240x160 — that fixed height
+   overrides the inline aspect-ratio and collapses the plate into a thin
+   strip. Document rules win over :host, so re-assert a real, responsive
+   4:3 plate with a small height floor so it can never collapse again. */
+.jc-split image-slot { width: 100%; height: auto; aspect-ratio: 4 / 3; min-height: 240px; }
+
+/* FAQ — native <details> styled to the system's hairline rhythm */
+.jc-faq details { border-bottom: 0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); }
+.jc-faq details:first-child { border-top: 0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); }
+.jc-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 30px 0; }
+.jc-faq summary::after { content: "+"; font-family: var(--font-display); font-size: 30px; line-height: 1; color: var(--accent); }
+.jc-faq details[open] summary::after { content: "\2013"; }
+
+/* Answer slides open/close. No-JS: native [open] shows/hides it instantly.
+   JS-enhanced (BaseLayout adds html.js-faq): a script animates the height with
+   the Web Animations API for a smooth slide in both directions, and toggles
+   `.is-open` to drive the +/– marker (the native [open] flag lingers through
+   the closing animation, so the marker keys off `.is-open` instead). */
+.jc-faq__a { max-width: 760px; overflow: hidden; }
+.jc-faq__a > * { margin: 0; }
+.jc-faq__a > :last-child { padding-bottom: 30px; }
+
+html.js-faq .jc-faq details[open] summary::after { content: "+"; }
+html.js-faq .jc-faq details.is-open summary::after { content: "\2013"; }
+
+/* Sister-brand cross-link cards */
+.jc-xgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.jc-xcard { display: block; text-decoration: none; background: var(--surface-card); padding: 40px; border: 0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); transition: background var(--dur-base) var(--ease-luxury); }
+.jc-xcard:hover { background: color-mix(in srgb, var(--accent-secondary) 14%, var(--surface-page)); }
+.jc-xgrid--3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Generic 3-up feature list (numbered editorial rows) */
+.jc-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.jc-step__n { font-family: var(--font-display); font-size: 40px; line-height: 1; color: var(--accent); }
+
+/* Menu / category list rows */
+.jc-list { display: flex; flex-direction: column; }
+.jc-list__row { display: grid; grid-template-columns: 200px 1fr; gap: 40px; padding: 30px 0; border-top: 0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); }
+.jc-list__row:last-child { border-bottom: 0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); }
+
+/* Contact: form + dispatch details */
+.jc-contact { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 70px; align-items: start; }
+.jc-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; }
+
+@media (max-width: 900px) {
+  .jc-split, .jc-split--narrow { grid-template-columns: 1fr; gap: 36px; }
+  /* Stacked: text spans the full width to match the article-feature sections. */
+  .jc-split--text { max-width: none; }
+  .jc-xgrid { grid-template-columns: 1fr; }
+  .jc-xgrid--3 { grid-template-columns: 1fr; }
+  .jc-steps { grid-template-columns: 1fr; gap: 30px; }
+  .jc-list__row { grid-template-columns: 1fr; gap: 10px; }
+  .jc-contact { grid-template-columns: 1fr; gap: 44px; }
+  .jc-form-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------------------
+   Insights — editorial article index (featured row + 3-up card grid)
+   Cards are <a> wrappers so the whole plate is the click target. The DC
+   runtime strips `class` off <image-slot>, so size the plates via the
+   parent class + descendant selector (same approach as .jc-split).
+   --------------------------------------------------------------------- */
+.jc-article-feature { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 60px; align-items: center; text-decoration: none; color: inherit; }
+.jc-article-feature image-slot { width: 100%; height: auto; aspect-ratio: 4 / 3; min-height: 280px; }
+.jc-article-feature__text { max-width: 540px; }
+.jc-article-feature:hover .jc-read { opacity: var(--opacity-fade); }
+
+.jc-article-card { display: block; text-decoration: none; color: inherit; background: var(--surface-card); border: 0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); border-radius: var(--radius-plate); overflow: hidden; transition: background var(--dur-base) var(--ease-luxury); }
+.jc-article-card:hover { background: color-mix(in srgb, var(--accent-secondary) 14%, var(--surface-page)); }
+.jc-article-card image-slot { width: 100%; height: auto; aspect-ratio: 3 / 2; min-height: 200px; }
+.jc-article-card__body { padding: var(--space-30); }
+
+.jc-read { display: inline-block; margin-top: var(--space-30); color: var(--accent); transition: opacity var(--dur-base) var(--ease-luxury); }
+
+@media (max-width: 900px) {
+  .jc-article-feature { grid-template-columns: 1fr; gap: 30px; }
+  /* Stacked: let the title + body span the full width (no column cap). */
+  .jc-article-feature__text { max-width: none; }
+}
+
+/* ---------------------------------------------------------------------
+   Image placeholder plate — stands in for real photography (preview build).
+   Replaces the DC <image-slot>; the ImagePlate component renders `.jc-plate`.
+   Swap for real <img>/<Image> when assets arrive — the layout rules below
+   (sizing, min-heights) keep working regardless of the inner media.
+   --------------------------------------------------------------------- */
+.jc-plate {
+  position: relative;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: var(--radius-plate);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent-secondary) 22%, var(--surface-page)) 0%,
+      color-mix(in srgb, var(--accent) 12%, var(--surface-page)) 100%
+    );
+}
+/* Hero band placeholder — matte ink wash so the scrim + light text read.
+   Re-assert absolute positioning here (two-class selector) because the base
+   `.jc-plate { position: relative }` rule is authored later than `.jc-hero__bg`
+   and would otherwise win, pulling the hero background into the flex flow. */
+.jc-hero__bg.jc-plate {
+  position: absolute;
+  inset: 0;
+  border-radius: 0; /* heroes stay full-bleed/square */
+  background: linear-gradient(135deg, #2a2723 0%, #1a1916 60%, #100f0d 100%);
+}
+.jc-plate__cap {
+  font-family: var(--font-body);
+  font-size: var(--caption-size);
+  line-height: var(--caption-line);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 20px;
+  max-width: 34ch;
+  color: var(--text-primary);
+  opacity: 0.4;
+}
+.jc-hero__bg.jc-plate .jc-plate__cap { color: var(--surface-page); opacity: 0.24; }
+
+/* Real photo (when supplied to ImagePlate) — covers the plate / hero band. */
+.jc-plate__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Plate sizing inside the shared layouts (mirrors the old image-slot rules). */
+.jc-split .jc-plate,
+.jc-article-feature .jc-plate { min-height: 240px; }
+/* Inside a card the rounded corners come from the card itself (overflow:hidden),
+   so the plate sits flush — drop its own radius to avoid corner gaps. */
+.jc-article-card .jc-plate { min-height: 200px; border-radius: 0; }

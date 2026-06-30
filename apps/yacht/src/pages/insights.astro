@@ -1,0 +1,133 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import ImagePlate from "@bali/ui/components/ImagePlate.astro";
+import SisterBrands from "@bali/ui/components/SisterBrands.astro";
+import { yacht, yachtGeo } from "../brand";
+import { img } from "../lib/images";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Bali Yacht Catering — Insights",
+    description:
+      "Notes from the galley and the deck — sunset menus, marine mixology and onboard dining craft from Bali Yacht Catering.",
+    url: "https://baliyachtcatering.com/insights",
+    publisher: { "@type": "Organization", name: "Bali Yacht Catering", url: "https://baliyachtcatering.com" },
+    blogPost: [
+      {
+        "@type": "BlogPosting",
+        headline: "Composing a sunset menu for the Indian Ocean",
+        description: "Timing canapés to golden hour, building courses that travel, and letting the last light do the plating.",
+      },
+      {
+        "@type": "BlogPosting",
+        headline: "Barefoot canapés: dining under sail",
+        description: "Grazing menus and fresh seafood styled for relaxed days on deck.",
+      },
+      {
+        "@type": "BlogPosting",
+        headline: "Marine mixology: a bar that holds its line in a swell",
+        description: "Building a cocktail programme that stays precise while the deck moves.",
+      },
+      {
+        "@type": "BlogPosting",
+        headline: "Plating at anchor, when the galley moves",
+        description: "How our onboard chefs hold a fine-dining standard far from a fixed kitchen.",
+      },
+    ],
+  },
+];
+---
+
+<PageLayout
+  brand={yacht}
+  current="insights"
+  title="Insights & Ocean Journals | Luxury Yacht Catering Bali"
+  description="Notes from the galley and the deck — sunset menus, marine mixology and onboard dining craft from Bali Yacht Catering across the island's charters and anchorages."
+  canonical="https://baliyachtcatering.com/insights"
+  geo={yachtGeo}
+  jsonLd={jsonLd}
+>
+  <section class="jc-hero section-tone--dark" data-screen-label="Yacht · Insights" style="min-height:68vh;">
+    <ImagePlate hero image={img("yacht-insights-hero")} caption="Table set on deck at golden hour" />
+    <div class="jc-hero__scrim"></div>
+    <div class="jc-hero__inner">
+      <div class="jc-hero__col">
+        <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Insights · Bali Yacht Catering</span>
+        <h1 class="type-h1" style="font-size:clamp(38px,5vw,62px); line-height:1.05; max-width:16ch;">Insights & ocean journals</h1>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:58ch;">Menus, mixology and the craft of dining on the water — notes from our chefs and crew across Bali’s charters, sunset cruises and anchorages.</p>
+        <div class="jc-meta" style="margin-top:50px;">
+          <span class="type-eyebrow">Menus</span>
+          <span class="type-eyebrow dot">/</span>
+          <span class="type-eyebrow">On the Water</span>
+          <span class="type-eyebrow dot">/</span>
+          <span class="type-eyebrow">Bar</span>
+          <span class="type-eyebrow dot">/</span>
+          <span class="type-eyebrow">Craft</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Latest from the maison</span>
+    <h2 class="type-h2" style="margin:20px 0 50px; max-width:22ch;">Dining that belongs to the water</h2>
+    <a class="jc-article-feature" href="#">
+      <ImagePlate image={img("yacht-insights-feature")} caption="Sunset canapés on deck" ratio="4 / 3" />
+      <div class="jc-article-feature__text">
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">Menus · 5 min read</span>
+        <h3 class="type-h2" style="margin:18px 0 0; font-size:clamp(26px,3vw,38px); line-height:1.12;">Composing a sunset menu for the Indian Ocean</h3>
+        <p class="type-body-md" style="opacity:0.78; margin:20px 0 0;">Timing canapés to golden hour, building courses that travel well between deck and galley, and letting the last light do the plating.</p>
+        <span class="type-eyebrow jc-read">Read article &rarr;</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="section-tone--tint Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">More reading</span>
+    <h2 class="type-h2" style="margin:20px 0 0;">From the galley and the deck</h2>
+    <div class="luxury-card-grid" style="--cols:3; margin-top:50px;">
+      <a class="jc-article-card" href="#">
+        <ImagePlate image={img("yacht-insights-grazing")} caption="Grazing platter on a catamaran" ratio="3 / 2" />
+        <div class="jc-article-card__body">
+          <span class="type-eyebrow" style="display:block; color:var(--accent);">On the Water · 4 min read</span>
+          <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">Barefoot canapés: dining under sail</h3>
+          <p class="type-body-md" style="opacity:0.74; margin:12px 0 0;">Grazing menus and fresh seafood styled for relaxed, easy days on deck.</p>
+          <span class="type-eyebrow jc-read">Read article &rarr;</span>
+        </div>
+      </a>
+      <a class="jc-article-card" href="#">
+        <ImagePlate image={img("yacht-insights-cocktail")} caption="Cocktail / bar setup onboard" ratio="3 / 2" />
+        <div class="jc-article-card__body">
+          <span class="type-eyebrow" style="display:block; color:var(--accent);">Bar · 3 min read</span>
+          <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">Marine mixology: a bar that holds its line in a swell</h3>
+          <p class="type-body-md" style="opacity:0.74; margin:12px 0 0;">Building a cocktail programme that stays precise while the deck moves underneath it.</p>
+          <span class="type-eyebrow jc-read">Read article &rarr;</span>
+        </div>
+      </a>
+      <a class="jc-article-card" href="#">
+        <ImagePlate image={img("yacht-insights-chef")} caption="Chef plating onboard" ratio="3 / 2" />
+        <div class="jc-article-card__body">
+          <span class="type-eyebrow" style="display:block; color:var(--accent);">Craft · 5 min read</span>
+          <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">Plating at anchor, when the galley moves</h3>
+          <p class="type-body-md" style="opacity:0.74; margin:12px 0 0;">How our onboard chefs hold a fine-dining standard far from a fixed kitchen.</p>
+          <span class="type-eyebrow jc-read">Read article &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section-tone--dark Section" style="text-align:center;">
+    <span class="type-eyebrow" style="display:block; opacity:0.82;">The Journal</span>
+    <h2 class="type-h2" style="font-size:clamp(28px,4vw,46px); line-height:1.12; max-width:26ch; margin:30px auto 0;">Notes from the galley, the deck and the last light on the water.</h2>
+    <p class="type-body-lg" style="opacity:0.82; max-width:58ch; margin:30px auto 0;">Planning a charter or a celebration at sea? We will shape the menu around your day.</p>
+    <div style="margin-top:50px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/booking">Book Your Experience</a></div>
+  </section>
+
+  <SisterBrands
+    current="yacht"
+    heading="Flying private or running a superyacht?"
+    intro="Our sister brands deliver the same standard in the air and at the dock — from private jet catering to full superyacht provisioning."
+  />
+</PageLayout>

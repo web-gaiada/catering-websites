@@ -1,0 +1,19 @@
+{
+  "name": "@bali/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Luxury Minimalist design system + shared Astro components for the Bali catering group.",
+  "exports": {
+    "./styles.css": "./src/styles/index.css",
+    "./components/*": "./src/components/*",
+    "./brand": "./src/brand.ts",
+    "./site-urls": "./src/site-urls.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "devDependencies": {
+    "astro": "^5.13.0"
+  }
+}

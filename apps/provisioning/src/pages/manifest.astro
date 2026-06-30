@@ -1,0 +1,196 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import ImagePlate from "@bali/ui/components/ImagePlate.astro";
+import SisterBrands from "@bali/ui/components/SisterBrands.astro";
+import { provisioning, provGeo } from "../brand";
+import { img } from "../lib/images";
+
+// Manifest submission destination — see the inline script at the bottom.
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Submit Provisioning Order & Manifest — Bali Yacht Provisioning",
+    url: "https://baliyachtprovisioning.com/manifest",
+    description: "Submit a superyacht provisioning manifest or shopping list for fast, accurate B2B procurement processing in Bali.",
+    mainEntity: {
+      "@type": "Organization",
+      name: "Bali Yacht Provisioning",
+      url: "https://baliyachtprovisioning.com",
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+62-811-0000-222",
+          contactType: "Provisioning & procurement",
+          availableLanguage: ["English", "Indonesian"],
+        },
+      ],
+    },
+  },
+];
+---
+
+<PageLayout
+  brand={provisioning}
+  current="manifest"
+  cta={{ label: "Call Procurement", href: "tel:+628110000222" }}
+  title="Submit Provisioning Manifest | Yacht Order Form Bali"
+  description="Upload your provisioning manifest or use our digital order sheets. Fast, accurate B2B procurement processing for superyacht chefs and chief stewardesses."
+  canonical="https://baliyachtprovisioning.com/manifest"
+  geo={provGeo}
+  jsonLd={jsonLd}
+>
+  <section class="jc-hero section-tone--dark" data-screen-label="Provisioning · Submit Manifest" style="min-height:58vh;">
+    <ImagePlate hero image={img("prov-manifest-hero")} caption="Provisioning order desk / manifest" />
+    <div class="jc-hero__scrim"></div>
+    <div class="jc-hero__inner">
+      <div class="jc-hero__col">
+        <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Provisioning Request · Order Manifest</span>
+        <h1 class="type-h1" style="font-size:clamp(38px,5vw,60px); line-height:1.05; max-width:20ch;">Submit Your Provisioning Order & Manifest</h1>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:60ch;">Upload a manifest or shopping list, or send your requirements below. We price, source and confirm with the accuracy a long itinerary demands.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <div class="jc-contact">
+      <div>
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">Request Quote or Upload Custom Shopping Lists</span>
+        <h2 class="type-h2" style="margin:20px 0 30px;">Submit a manifest</h2>
+
+        <form data-contact-form method="POST" action={contactEndpoint || "#"} enctype="multipart/form-data" novalidate>
+          <div class="jc-form-grid">
+            <div class="luxury-field">
+              <input id="f-name" class="luxury-field__input" name="name" placeholder=" " required />
+              <label for="f-name" class="luxury-field__label">Contact name</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-vessel" class="luxury-field__input" name="vessel" placeholder=" " required />
+              <label for="f-vessel" class="luxury-field__label">Vessel name</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-role" class="luxury-field__input" name="role" placeholder=" " />
+              <label for="f-role" class="luxury-field__label">Role (captain / chef / chief stew)</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-email" type="email" class="luxury-field__input" name="email" placeholder=" " required />
+              <label for="f-email" class="luxury-field__label">Email</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-phone" class="luxury-field__input" name="phone" placeholder=" " required />
+              <label for="f-phone" class="luxury-field__label">Phone / WhatsApp</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-berth" class="luxury-field__input" name="berth" placeholder=" " value="Benoa Marina" />
+              <label for="f-berth" class="luxury-field__label">Marina / berth</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-date" class="luxury-field__input" name="date" placeholder=" " />
+              <label for="f-date" class="luxury-field__label">Delivery date</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-crew" class="luxury-field__input" name="crew" placeholder=" " />
+              <label for="f-crew" class="luxury-field__label">Crew & guest count</label>
+            </div>
+          </div>
+          <div class="luxury-field">
+            <textarea id="f-manifest" class="luxury-field__input" name="manifest" placeholder=" " required rows="4" style="resize:vertical;"></textarea>
+            <label for="f-manifest" class="luxury-field__label">Manifest details, brands & grades</label>
+          </div>
+          <div style="margin-top:30px;">
+            <span class="type-eyebrow" style="display:block; color:var(--accent); opacity:0.8; margin-bottom:12px;">Attach manifest (CSV, XLS, PDF)</span>
+            <input type="file" name="file" accept=".csv,.xls,.xlsx,.pdf,.numbers" class="type-body-md" style="font-family:var(--font-body);" />
+          </div>
+          <p class="type-caption" style="margin:24px 0 0; color:var(--accent); opacity:0.6;">Your manifest is used only to price and prepare your order — never anything more.</p>
+          <div style="margin-top:30px;">
+            <button type="submit" class="luxury-btn luxury-btn--solid luxury-btn--md">Submit Manifest</button>
+          </div>
+        </form>
+
+        <div data-contact-success hidden style="border:0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); padding:50px;">
+          <span class="type-eyebrow" style="display:block; color:var(--accent);">Manifest received</span>
+          <h3 class="type-h3" style="margin:15px 0 0;">Thank you — procurement has your manifest.</h3>
+          <p class="type-body-md" style="margin:15px 0 0; opacity:0.78; max-width:48ch;">We will price, source and return a confirmed quote shortly. For a vessel departing soon, reach procurement directly on +62 811 0000 222.</p>
+          <div style="margin-top:30px;">
+            <button type="button" class="luxury-btn luxury-btn--ghost luxury-btn--md" data-contact-reset>Submit Another</button>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">Streamlined F&B Procurement for Yacht Crews</span>
+        <h2 class="type-h2" style="margin:20px 0 30px;">Procurement desk</h2>
+        <div style="display:flex; flex-direction:column; gap:30px;">
+          <div>
+            <span class="type-eyebrow" style="opacity:0.6;">Procurement</span>
+            <a href="tel:+628110000222" class="type-h3" style="display:block; margin-top:8px; text-decoration:none; color:var(--text-primary);">+62 811 0000 222</a>
+          </div>
+          <hr class="luxury-separator luxury-separator--h" />
+          <div>
+            <span class="type-eyebrow" style="opacity:0.6;">Email</span>
+            <a href="mailto:info@baliyachtprovisioning.com" class="type-body-lg" style="display:block; margin-top:8px; text-decoration:none; color:var(--text-primary); word-break:break-word;">info@baliyachtprovisioning.com</a>
+          </div>
+          <hr class="luxury-separator luxury-separator--h" />
+          <div>
+            <span class="type-eyebrow" style="opacity:0.6;">Operating From</span>
+            <p class="type-body-md" style="margin:8px 0 0;">Bali Maritime Tourism Hub<br />Benoa Marina, Bali, Indonesia</p>
+          </div>
+          <hr class="luxury-separator luxury-separator--h" />
+          <div>
+            <span class="type-eyebrow" style="opacity:0.6;">Turnaround</span>
+            <p class="type-body-md" style="margin:8px 0 0;">Priced manifests returned same day. Standing accounts available for repeat itineraries.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <SisterBrands
+    current="prov"
+    heading="Catering by air or by charter?"
+    intro="Our sister brands deliver the same standard for private aviation and yacht charter dining in Bali."
+  />
+</PageLayout>
+
+<script>
+  // Manifest form. With PUBLIC_CONTACT_ENDPOINT set, posts via fetch (multipart,
+  // including the attachment) and shows the confirmation panel; without it,
+  // runs in demo mode (confirm UI only).
+  (function () {
+    const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+    const success = document.querySelector<HTMLElement>("[data-contact-success]");
+    const reset = document.querySelector<HTMLElement>("[data-contact-reset]");
+    if (!form || !success) return;
+
+    const showSuccess = () => {
+      form.hidden = true;
+      success.hidden = false;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const endpoint = form.getAttribute("action");
+      if (endpoint && endpoint !== "#") {
+        try {
+          await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+        } catch {
+          /* swallow — still confirm; provider may also redirect */
+        }
+      }
+      showSuccess();
+    });
+
+    reset?.addEventListener("click", () => {
+      success.hidden = true;
+      form.hidden = false;
+      form.reset();
+    });
+  })();
+</script>

@@ -1,0 +1,45 @@
+---
+/* =====================================================================
+   ImagePlate — renders a real photo when one is supplied, otherwise the
+   placeholder plate (accent wash + caption). Pass `image` (an astro:assets
+   ImageMetadata) to show a real, optimized photo; omit it for the
+   placeholder. This lets photography drop in per-slot without touching
+   layout — see each app's src/images/ + src/lib/images.ts.
+
+   - hero:    fills an absolutely-positioned hero background band.
+   - default: an inline 4:3 (or given ratio) content plate.
+   ===================================================================== */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+export interface Props {
+  /** Placeholder caption (also used as alt text when an image is supplied). */
+  caption?: string;
+  /** CSS aspect-ratio for inline plates, e.g. "4 / 3" | "3 / 2". */
+  ratio?: string;
+  /** Render as a full-bleed hero background. */
+  hero?: boolean;
+  id?: string;
+  class?: string;
+  /** Real photo to render (optimized). When absent, the placeholder shows. */
+  image?: ImageMetadata;
+  /** Explicit alt text; falls back to `caption`. */
+  alt?: string;
+}
+const { caption = "", ratio = "4 / 3", hero = false, id, class: className, image, alt } = Astro.props;
+const classes = ["jc-plate", hero && "jc-hero__bg", className].filter(Boolean).join(" ");
+const style = hero ? undefined : `aspect-ratio:${ratio};`;
+const sizes = hero ? "100vw" : "(max-width: 900px) 100vw, 50vw";
+const widths = hero ? [768, 1280, 1600, 2000, 2600] : [480, 768, 1024, 1400];
+---
+{
+  image ? (
+    <div class={classes} id={id} style={style}>
+      <Image src={image} alt={alt ?? caption} class="jc-plate__img" widths={widths} sizes={sizes} />
+    </div>
+  ) : (
+    <div class={classes} id={id} style={style} role="img" aria-label={caption || "Placeholder image"}>
+      {caption && <span class="jc-plate__cap">{caption}</span>}
+    </div>
+  )
+}

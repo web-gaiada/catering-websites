@@ -1,0 +1,30 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import { jet, jetGeo } from "../brand";
+---
+
+<PageLayout
+  brand={jet}
+  current="404"
+  title="Page Not Found | Bali Jet Catering"
+  description="The page you are looking for could not be found. Return to Bali Jet Catering or contact our 24/7 dispatch desk."
+  canonical="https://balijetcatering.com/"
+  robots="noindex, follow"
+  geo={jetGeo}
+>
+  <section
+    class="jc-hero section-tone--dark Section"
+    data-screen-label="Jet · 404"
+    style="min-height:72vh; display:flex; align-items:center; text-align:center;"
+  >
+    <div style="margin:0 auto; max-width:60ch;">
+      <span class="type-eyebrow" style="display:block; opacity:0.82;">Error 404 · Off the Flight Plan</span>
+      <h1 class="type-h1" style="font-size:clamp(40px,5.6vw,68px); line-height:1.04; margin-top:30px;">This page never left the ground</h1>
+      <p class="type-body-lg" style="opacity:0.84; margin-top:30px;">The page you are looking for has moved, been retired, or never existed. Let us guide you back on course — or reach our dispatch desk directly, around the clock.</p>
+      <div style="display:flex; gap:20px; margin-top:60px; flex-wrap:wrap; justify-content:center;">
+        <a class="luxury-btn luxury-btn--solid luxury-btn--md" href="/">Back to Home</a>
+        <a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/contact">Contact Dispatch</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

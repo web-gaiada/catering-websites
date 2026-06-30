@@ -1,0 +1,20 @@
+{
+  "name": "bali-luxury-catering-group",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Monorepo for the Bali Luxury Catering Group: three brand sites + group portal on one shared design system.",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @bali/group dev",
+    "dev:group": "pnpm --filter @bali/group dev",
+    "dev:jet": "pnpm --filter @bali/jet dev",
+    "dev:yacht": "pnpm --filter @bali/yacht dev",
+    "dev:provisioning": "pnpm --filter @bali/provisioning dev",
+    "build": "pnpm -r build",
+    "preview": "pnpm --filter @bali/group preview"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

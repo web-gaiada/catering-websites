@@ -1,0 +1,133 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import ImagePlate from "@bali/ui/components/ImagePlate.astro";
+import SisterBrands from "@bali/ui/components/SisterBrands.astro";
+import { provisioning, provGeo } from "../brand";
+import { img } from "../lib/images";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Bali Yacht Provisioning — Insights",
+    description:
+      "Field notes on superyacht provisioning — cold-chain logistics, manifest sourcing and port protocol at Benoa Marina.",
+    url: "https://baliyachtprovisioning.com/insights",
+    publisher: { "@type": "Organization", name: "Bali Yacht Provisioning", url: "https://baliyachtprovisioning.com" },
+    blogPost: [
+      {
+        "@type": "BlogPosting",
+        headline: "Keeping the cold chain unbroken to the passerelle",
+        description: "How a provision stays at temperature from store to ship across a Bali afternoon.",
+      },
+      {
+        "@type": "BlogPosting",
+        headline: "Reading a superyacht manifest, line by line",
+        description: "From dry stores to the cellar — turning a chief stew's list into one accurate delivery.",
+      },
+      {
+        "@type": "BlogPosting",
+        headline: "Sourcing the rare: Wagyu, cru wine and the hard-to-find",
+        description: "Where the grades, vintages and brands a demanding galley asks for actually come from.",
+      },
+      {
+        "@type": "BlogPosting",
+        headline: "Customs and port protocol at Benoa, handled",
+        description: "Clearing provisions through the Bali Maritime Tourism Hub without holding a departure.",
+      },
+    ],
+  },
+];
+---
+
+<PageLayout
+  brand={provisioning}
+  current="insights"
+  title="Insights & Provisioning Notes | Superyacht Provisioning Bali"
+  description="Field notes on superyacht provisioning — cold-chain logistics, manifest sourcing and port protocol at Bali's Benoa Marina from Bali Yacht Provisioning."
+  canonical="https://baliyachtprovisioning.com/insights"
+  geo={provGeo}
+  jsonLd={jsonLd}
+>
+  <section class="jc-hero section-tone--dark" data-screen-label="Provisioning · Insights" style="min-height:68vh;">
+    <ImagePlate hero image={img("prov-insights-hero")} caption="Provisioning crates dockside / cold-chain transport" />
+    <div class="jc-hero__scrim"></div>
+    <div class="jc-hero__inner">
+      <div class="jc-hero__col">
+        <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Insights · Bali Yacht Provisioning</span>
+        <h1 class="type-h1" style="font-size:clamp(38px,5vw,62px); line-height:1.05; max-width:16ch;">Insights & provisioning notes</h1>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:58ch;">Field notes on cold-chain logistics, manifest sourcing and port protocol — how we provision superyachts out of Bali’s Benoa Marina.</p>
+        <div class="jc-meta" style="margin-top:50px;">
+          <span class="type-eyebrow">Logistics</span>
+          <span class="type-eyebrow dot">/</span>
+          <span class="type-eyebrow">Procurement</span>
+          <span class="type-eyebrow dot">/</span>
+          <span class="type-eyebrow">Sourcing</span>
+          <span class="type-eyebrow dot">/</span>
+          <span class="type-eyebrow">Port</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Latest from the maison</span>
+    <h2 class="type-h2" style="margin:20px 0 50px; max-width:22ch;">Notes from the supply chain</h2>
+    <a class="jc-article-feature" href="#">
+      <ImagePlate image={img("prov-insights-feature")} caption="Refrigerated transport / dockside delivery" ratio="4 / 3" />
+      <div class="jc-article-feature__text">
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">Logistics · 6 min read</span>
+        <h3 class="type-h2" style="margin:18px 0 0; font-size:clamp(26px,3vw,38px); line-height:1.12;">Keeping the cold chain unbroken to the passerelle</h3>
+        <p class="type-body-md" style="opacity:0.78; margin:20px 0 0;">Temperature-controlled transport and marine packing — how a provision stays exactly at temperature from store to ship across a Bali afternoon.</p>
+        <span class="type-eyebrow jc-read">Read article &rarr;</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="section-tone--tint Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">More reading</span>
+    <h2 class="type-h2" style="margin:20px 0 0;">From sourcing to the dockside handover</h2>
+    <div class="luxury-card-grid" style="--cols:3; margin-top:50px;">
+      <a class="jc-article-card" href="#">
+        <ImagePlate image={img("prov-insights-manifest")} caption="Manifest / provisioning crates" ratio="3 / 2" />
+        <div class="jc-article-card__body">
+          <span class="type-eyebrow" style="display:block; color:var(--accent);">Procurement · 5 min read</span>
+          <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">Reading a superyacht manifest, line by line</h3>
+          <p class="type-body-md" style="opacity:0.74; margin:12px 0 0;">From dry stores to the cellar — turning a chief stew’s list into one accurate delivery.</p>
+          <span class="type-eyebrow jc-read">Read article &rarr;</span>
+        </div>
+      </a>
+      <a class="jc-article-card" href="#">
+        <ImagePlate image={img("prov-insights-cellar")} caption="Premium imports / cellar" ratio="3 / 2" />
+        <div class="jc-article-card__body">
+          <span class="type-eyebrow" style="display:block; color:var(--accent);">Sourcing · 4 min read</span>
+          <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">Sourcing the rare: Wagyu, cru wine and the hard-to-find</h3>
+          <p class="type-body-md" style="opacity:0.74; margin:12px 0 0;">Where the grades, vintages and brands a demanding galley asks for actually come from.</p>
+          <span class="type-eyebrow jc-read">Read article &rarr;</span>
+        </div>
+      </a>
+      <a class="jc-article-card" href="#">
+        <ImagePlate image={img("prov-insights-port")} caption="Benoa marina / port operations" ratio="3 / 2" />
+        <div class="jc-article-card__body">
+          <span class="type-eyebrow" style="display:block; color:var(--accent);">Port · 3 min read</span>
+          <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">Customs and port protocol at Benoa, handled</h3>
+          <p class="type-body-md" style="opacity:0.74; margin:12px 0 0;">Clearing provisions through the Bali Maritime Tourism Hub without holding a departure.</p>
+          <span class="type-eyebrow jc-read">Read article &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section-tone--dark Section" style="text-align:center;">
+    <span class="type-eyebrow" style="display:block; opacity:0.82;">The Journal</span>
+    <h2 class="type-h2" style="font-size:clamp(28px,4vw,46px); line-height:1.12; max-width:26ch; margin:30px auto 0;">Field notes on sourcing, cold chain and the dockside handover.</h2>
+    <p class="type-body-lg" style="opacity:0.82; max-width:58ch; margin:30px auto 0;">Have a manifest to fill? Send the list and we will price, source and confirm.</p>
+    <div style="margin-top:50px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/manifest">Submit a Manifest</a></div>
+  </section>
+
+  <SisterBrands
+    current="prov"
+    heading="Catering by air or by charter?"
+    intro="Our sister brands deliver the same standard for private aviation and yacht charter dining in Bali."
+  />
+</PageLayout>

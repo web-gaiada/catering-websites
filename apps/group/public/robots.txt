@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://baliluxurycatering.com/sitemap-index.xml

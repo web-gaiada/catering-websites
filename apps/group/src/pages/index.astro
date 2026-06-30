@@ -1,0 +1,120 @@
+---
+import BaseLayout from "@bali/ui/components/BaseLayout.astro";
+import { SITE_URLS } from "@bali/ui/site-urls";
+
+// The three houses of the group. Link targets come from the shared, env-driven
+// SITE_URLS map: production builds use the real domains; local dev overrides
+// via apps/group/.env.development (localhost ports).
+const houses = [
+  {
+    domain: "balijetcatering.com",
+    href: SITE_URLS.jet,
+    name: "Bali Jet Catering",
+    desc: "VVIP inflight & private jet catering at Bali Ngurah Rai (DPS / WADD), delivered tarmac-side, 24/7.",
+  },
+  {
+    domain: "baliyachtcatering.com",
+    href: SITE_URLS.yacht,
+    name: "Bali Yacht Catering",
+    desc: "Luxury yacht catering for day charters, sunset cruises and private ocean events, with onboard chefs.",
+  },
+  {
+    domain: "baliyachtprovisioning.com",
+    href: SITE_URLS.prov,
+    name: "Bali Yacht Provisioning",
+    desc: "B2B superyacht provisioning & maritime F&B procurement at Benoa Marina, delivered dockside.",
+  },
+];
+
+// Structured data for the portal: the parent Organization and its three houses
+// (production domains — canonical for crawlers regardless of dev env), plus a
+// WebSite node. Mirrors the FoodEstablishment/FAQ JSON-LD on the brand pages.
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Bali Luxury Catering Group",
+    url: "https://baliluxurycatering.com",
+    description:
+      "Three Bali maisons, one standard: VVIP private jet catering, luxury yacht event catering, and superyacht provisioning.",
+    areaServed: "Bali, Indonesia",
+    subOrganization: [
+      { "@type": "Organization", name: "Bali Jet Catering", url: "https://balijetcatering.com" },
+      { "@type": "Organization", name: "Bali Yacht Catering", url: "https://baliyachtcatering.com" },
+      { "@type": "Organization", name: "Bali Yacht Provisioning", url: "https://baliyachtprovisioning.com" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Bali Luxury Catering Group",
+    url: "https://baliluxurycatering.com",
+  },
+];
+---
+
+<BaseLayout
+  title="Bali Luxury Catering Group | Jet, Yacht & Provisioning"
+  description="Three Bali maisons, one standard: VVIP private jet catering, luxury yacht event catering, and superyacht provisioning. Choose a site to enter."
+  siteName="Bali Luxury Catering Group"
+  canonical="https://baliluxurycatering.com/"
+  jsonLd={jsonLd}
+>
+  <section
+    class="section-tone--dark"
+    data-screen-label="Group · Index"
+    style="min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:100px var(--layout-gutter);"
+  >
+    <div style="max-width:760px;">
+      <span class="type-eyebrow" style="display:block; opacity:0.82;">Bali · By Land, Air & Sea</span>
+      <h1 class="type-h1" style="font-size:clamp(40px,5.6vw,68px); line-height:1.05; margin:30px 0 0; max-width:16ch;">
+        Three houses, one standard.
+      </h1>
+      <p class="type-body-lg" style="opacity:0.82; margin:30px 0 0; max-width:58ch;">
+        Bespoke fine dining and provisioning for private aviation, yacht charters and superyachts — sourced,
+        prepared and delivered to a single, uncompromising standard across Bali. Choose a house to enter.
+      </p>
+    </div>
+
+    <div class="jc-steps" style="margin-top:70px;">
+      {
+        houses.map((house) => (
+          <a class="jc-enter" href={house.href}>
+            <span class="type-eyebrow" style="color:var(--accent-secondary);">{house.domain}</span>
+            <h3 class="type-h3" style="color:var(--surface-page); margin:15px 0 0;">{house.name}</h3>
+            <p class="type-body-md" style="color:var(--surface-page); opacity:0.72; margin:12px 0 0;">
+              {house.desc}
+            </p>
+            <span class="type-eyebrow" style="color:var(--accent-secondary); margin-top:28px; display:inline-block;">
+              Enter Site →
+            </span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div style="margin-top:70px;">
+      <span class="type-caption" style="color:var(--surface-page); opacity:0.5; letter-spacing:0.06em;">
+        © MMXXVI · Bali luxury catering & provisioning. A preview build — placeholder imagery & contact details.
+      </span>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Portal chooser card — the DC source used a non-standard `style-hover`
+     attribute; expressed here as a real hover rule on the hairline frame. */
+  .jc-enter {
+    display: block;
+    text-decoration: none;
+    border: 0.5px solid rgba(244, 241, 234, 0.22);
+    padding: 40px;
+    transition:
+      border-color var(--dur-base) var(--ease-luxury),
+      background var(--dur-base) var(--ease-luxury);
+  }
+  .jc-enter:hover {
+    border-color: var(--accent-secondary);
+    background: rgba(244, 241, 234, 0.04);
+  }
+</style>

@@ -1,0 +1,183 @@
+---
+/* =====================================================================
+   BaseLayout — the shared HTML shell for every page across all sites.
+   Renders <head> (SEO + Open Graph + optional JSON-LD), links the shared
+   design-system stylesheet, wraps the page body in the `.Canvas`, and
+   installs the `html.is-ready` flash-guard flag the site layer relies on.
+
+   The DC source expressed this via <helmet> + a `.Canvas` wrapper; here it
+   is a single reusable layout so individual pages only describe content.
+   ===================================================================== */
+import "../styles/index.css";
+
+export interface JsonLd {
+  [key: string]: unknown;
+}
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Absolute canonical URL for this page. */
+  canonical: string;
+  /** og:site_name + twitter context. */
+  siteName: string;
+  themeColor?: string;
+  robots?: string;
+  ogType?: string;
+  ogImage?: string;
+  twitterCard?: string;
+  locale?: string;
+  /** Optional geo meta (used by the local-business brand pages). */
+  geo?: { region?: string; placename?: string; position?: string };
+  /** Zero or more JSON-LD blocks rendered as application/ld+json script tags. */
+  jsonLd?: JsonLd[];
+  /** Extra classes for <body> (e.g. brand scoping hooks). */
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  siteName,
+  themeColor = "#1A1916",
+  robots = "index, follow, max-image-preview:large",
+  ogType = "website",
+  ogImage,
+  twitterCard = "summary_large_image",
+  locale = "en_US",
+  geo,
+  jsonLd = [],
+  bodyClass,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" content={themeColor} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content={locale} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    {geo?.region && <meta name="geo.region" content={geo.region} />}
+    {geo?.placename && <meta name="geo.placename" content={geo.placename} />}
+    {geo?.position && <meta name="geo.position" content={geo.position} />}
+    {geo?.position && <meta name="ICBM" content={geo.position} />}
+
+    {
+      jsonLd.map((block: JsonLd) => (
+        <script type="application/ld+json" is:inline set:html={JSON.stringify(block)} />
+      ))
+    }
+  </head>
+  <body class={bodyClass}>
+    <div class="Canvas">
+      <slot />
+    </div>
+
+    <!-- Flash guard: hold button transitions off until first paint settles,
+         matching the site layer's `html.is-ready` gate. -->
+    <script is:inline>
+      (function () {
+        var ready = function () {
+          document.documentElement.classList.add("is-ready");
+        };
+        if (typeof requestAnimationFrame !== "undefined") requestAnimationFrame(ready);
+        else ready();
+        setTimeout(ready, 350);
+      })();
+    </script>
+
+    <!-- FAQ accordion: progressively enhance the native <details> so open AND
+         close slide smoothly. Animates the answer's height with the Web
+         Animations API (symmetric, no fr-interpolation jank). `.is-open` tracks
+         the open state for the marker; the native `open` flag stays set until
+         the close animation ends so the content is still there to animate. Each
+         `.jc-faq` is an exclusive group: opening one closes its open sibling. -->
+    <script is:inline>
+      (function () {
+        var groups = document.querySelectorAll(".jc-faq");
+        if (!groups.length || typeof Element.prototype.animate !== "function") return;
+        document.documentElement.classList.add("js-faq");
+
+        var DUR = 520; // matches --dur-slow
+        var EASE = "cubic-bezier(0.22, 0.61, 0.36, 1)"; // --ease-luxury
+        var reduce = window.matchMedia
+          && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        var slide = function (content, from, to, onDone) {
+          if (content._anim) content._anim.cancel();
+          if (reduce) { if (onDone) onDone(); return; }
+          var anim = content.animate(
+            [{ height: from + "px" }, { height: to + "px" }],
+            { duration: DUR, easing: EASE }
+          );
+          content._anim = anim;
+          anim.onfinish = function () {
+            if (content._anim === anim) content._anim = null;
+            if (onDone) onDone(); // completion side-effect (e.g. set open=false)
+          };
+          anim.oncancel = function () {
+            // interrupted by a reopen — clear the handle but DON'T run onDone,
+            // or a cancelled close would hide the content mid-reopen.
+            if (content._anim === anim) content._anim = null;
+          };
+        };
+
+        var current = function (content, fallback) {
+          return content._anim ? content.getBoundingClientRect().height : fallback;
+        };
+
+        var open = function (detail, content) {
+          detail.classList.add("is-open");
+          detail.open = true; // render the content so it can be measured
+          slide(content, current(content, 0), content.scrollHeight);
+        };
+
+        var close = function (detail, content) {
+          detail.classList.remove("is-open");
+          slide(content, current(content, content.scrollHeight), 0, function () {
+            detail.open = false;
+          });
+        };
+
+        groups.forEach(function (group) {
+          group.querySelectorAll("details").forEach(function (detail) {
+            var summary = detail.querySelector("summary");
+            var content = detail.querySelector(".jc-faq__a");
+            if (!summary || !content) return;
+            if (detail.open) detail.classList.add("is-open");
+
+            summary.addEventListener("click", function (e) {
+              e.preventDefault();
+              if (detail.classList.contains("is-open")) {
+                close(detail, content);
+                return;
+              }
+              var sib = group.querySelector("details.is-open");
+              if (sib && sib !== detail) close(sib, sib.querySelector(".jc-faq__a"));
+              open(detail, content);
+            });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

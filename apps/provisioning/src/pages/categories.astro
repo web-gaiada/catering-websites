@@ -1,0 +1,178 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import ImagePlate from "@bali/ui/components/ImagePlate.astro";
+import SisterBrands from "@bali/ui/components/SisterBrands.astro";
+import { provisioning, provGeo } from "../brand";
+import { img } from "../lib/images";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Superyacht provisioning categories — premium F&B procurement",
+    name: "Global Sourcing & Premium Provisioning Categories",
+    description:
+      "Premium imported meats and seafood, artisanal cheeses, organic produce, specialty dry goods and an elite cellar for superyacht provisioning in Bali.",
+    areaServed: "Bali — Benoa Marina & regional anchorages",
+    provider: { "@type": "Organization", name: "Bali Yacht Provisioning", url: "https://baliyachtprovisioning.com" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Can you source a specific brand, grade or vintage?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. We procure to specification — exact brands, cuts, grades and rare vintages where available, including allocations on request.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you supply organic and local produce?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We supply daily organic produce from trusted Bali growers alongside imported specialty items, selected for quality and shelf life.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is there a minimum order?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We are built for full superyacht manifests; smaller top-up orders and last-minute additions are accommodated by arrangement.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can you match dietary and allergen requirements across the manifest?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Items are sourced, labelled and segregated to the chief stewardess's specification for the whole crew and guest manifest.",
+        },
+      },
+    ],
+  },
+];
+---
+
+<PageLayout
+  brand={provisioning}
+  current="categories"
+  title="Imported Gourmet Ingredients & Yacht Provisions | Bali"
+  description="Bulk luxury F&B procurement for superyachts. Top-grade Wagyu beef, imported cheeses, fresh local organic produce, fine wines, and rare dry goods."
+  canonical="https://baliyachtprovisioning.com/categories"
+  geo={provGeo}
+  jsonLd={jsonLd}
+>
+  <section class="jc-hero section-tone--dark" data-screen-label="Provisioning · Categories" style="min-height:74vh;">
+    <ImagePlate hero image={img("prov-cat-hero")} caption="Premium produce / dry store / cellar" />
+    <div class="jc-hero__scrim"></div>
+    <div class="jc-hero__inner">
+      <div class="jc-hero__col">
+        <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">The Pantry · Provisioning Categories</span>
+        <h1 class="type-h1" style="font-size:clamp(38px,5vw,62px); line-height:1.05; max-width:18ch;">Global Sourcing & Premium Provisioning Categories</h1>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:60ch;">From dry stores to the daily catch and the cellar — every category sourced to specification, graded and packed for the long itinerary.</p>
+        <div style="display:flex; gap:20px; margin-top:50px; flex-wrap:wrap;">
+          <a class="luxury-btn luxury-btn--solid luxury-btn--md" href="/manifest">Submit a Manifest</a>
+          <a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/port-logistics">Port Logistics</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Premium Imported Meats, Poultry & Fresh Local Daily Catch</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:22ch;">The protein store</h2>
+    <p class="type-body-lg" style="margin:30px 0 50px; max-width:64ch;">Sourced to grade and brand, portioned to the chef's spec, and packed to hold — the centre of every superyacht manifest.</p>
+    <div class="jc-list">
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Beef & Wagyu</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Full-blood and cross-bred Wagyu, dry-aged cuts and prime grades, sourced to the chef's exact specification.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Poultry & Game</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Free-range poultry, duck and seasonal game, portioned and vacuum-packed to order.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Daily Catch & Seafood</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Fresh local catch, lobster, prawns and sashimi-grade fish — landed and delivered the same day.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Charcuterie & Smallgoods</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Cured meats, terrines and artisanal smallgoods from European and local makers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--tint Section">
+    <div class="jc-split">
+      <ImagePlate image={img("prov-cat-plate1")} caption="Cheese / organic produce / dry store" ratio="4 / 3" />
+      <div class="jc-split--text">
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">Artisanal Cheeses, Organic Produce & Specialty Dry Store Items</span>
+        <h2 class="type-h2" style="margin:20px 0 0;">The pantry, in full</h2>
+        <p class="type-body-md" style="margin:30px 0 0;">A maturing room of artisanal cheeses, daily organic produce from trusted Bali growers, and a deep specialty dry store — oils, vinegars, rare grains, condiments and baking goods. If the chef can name it, we will find it.</p>
+        <div style="margin-top:40px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/manifest">Request a List</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Elite Cellar Sourcing: Fine Wines, Champagne & Rare Spirits</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:22ch;">The cellar</h2>
+    <div class="luxury-card-grid" style="--cols:3; margin-top:50px;">
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Fine Wines</h3>
+        <p class="luxury-card__body">Cellar-grade reds and whites by the case, including allocations and rare vintages sourced to the wine list.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/manifest">Enquire</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Champagne & Sparkling</h3>
+        <p class="luxury-card__body">Grande marque Champagne and prestige cuvées, chilled and packed for immediate service at anchor.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/manifest">Source</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Rare Spirits</h3>
+        <p class="luxury-card__body">Aged whisky, cognac, agave and a full bar programme — rare bottles located on request.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/manifest">Request</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-tone--dark Section" style="text-align:center;">
+    <span class="type-eyebrow" style="display:block; opacity:0.82;">Sourced to Spec</span>
+    <h2 class="type-h2" style="font-size:clamp(28px,4vw,46px); line-height:1.12; max-width:26ch; margin:30px auto 0;">If the chef can name it, we will find it — and land it cold.</h2>
+    <p class="type-body-lg" style="opacity:0.82; max-width:58ch; margin:30px auto 0;">Exact brands, grades and vintages, consolidated from a global supply base into one accountable delivery.</p>
+    <div style="margin-top:50px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/manifest">Submit a Manifest</a></div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Answers</span>
+    <h2 class="type-h2" style="margin:20px 0 40px;">Sourcing questions</h2>
+    <div class="jc-faq">
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Can you source a specific brand, grade or vintage?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Yes. We procure to specification — exact brands, cuts, grades and rare vintages where available, including allocations on request.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Do you supply organic and local produce?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">We supply daily organic produce from trusted Bali growers alongside imported specialty items, selected for quality and shelf life.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Is there a minimum order?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">We are built for full superyacht manifests; smaller top-up orders and last-minute additions are accommodated by arrangement.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Can you match dietary and allergen requirements across the manifest?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Yes. Items are sourced, labelled and segregated to the chief stewardess's specification for the whole crew and guest manifest.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <SisterBrands
+    current="prov"
+    heading="Catering by air or by charter?"
+    intro="Our sister brands deliver the same standard for private aviation and yacht charter dining in Bali."
+  />
+</PageLayout>

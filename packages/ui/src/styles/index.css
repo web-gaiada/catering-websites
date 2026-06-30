@@ -1,0 +1,16 @@
+/* =====================================================================
+   @bali/ui — Global style entry.
+   Consumers import this ONE file. It is an import manifest only.
+
+   Layer order matters:
+     1. design-system tokens (fonts/colors/type/spacing)
+     2. design-system components (Luxury Minimalist primitives)
+     3. site layer (shared page composition on top of the DS, ex-"site.css")
+   ===================================================================== */
+
+@import "./tokens/fonts.css";
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./components.css";
+@import "./site.css";

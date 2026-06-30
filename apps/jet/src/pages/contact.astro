@@ -1,0 +1,211 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import ImagePlate from "@bali/ui/components/ImagePlate.astro";
+import SisterBrands from "@bali/ui/components/SisterBrands.astro";
+import { jet, jetGeo } from "../brand";
+import { img } from "../lib/images";
+
+// Where the order form posts. Set PUBLIC_CONTACT_ENDPOINT (e.g. a Formspree /
+// Web3Forms URL) per environment; until then the form runs in demo mode
+// (shows the confirmation panel client-side without sending), matching the
+// original design preview. See the inline script at the bottom of this page.
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Order & Dispatch — Bali Jet Catering",
+    url: "https://balijetcatering.com/contact",
+    description:
+      "Place a private jet catering order or request a quote. 24/7 dispatch for flight coordinators and pilots at Bali Ngurah Rai (DPS/WADD).",
+    mainEntity: {
+      "@type": "Organization",
+      name: "Bali Jet Catering",
+      url: "https://balijetcatering.com",
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+62-811-0000-000",
+          contactType: "Dispatch & orders",
+          availableLanguage: ["English", "Indonesian"],
+          hoursAvailable: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            opens: "00:00",
+            closes: "23:59",
+          },
+        },
+      ],
+    },
+  },
+];
+---
+
+<PageLayout
+  brand={jet}
+  current="contact"
+  cta={{ label: "Call Dispatch", href: "tel:+628110000000" }}
+  title="Order Inflight Catering Bali | Flight Dispatch Contact 24/7"
+  description="Place your private aviation catering order or request an immediate quote. 24/7 dedicated support for flight coordinators and pilots flying out of Bali."
+  canonical="https://balijetcatering.com/contact"
+  geo={jetGeo}
+  jsonLd={jsonLd}
+>
+  <section class="jc-hero section-tone--dark" data-screen-label="Jet · Order & Dispatch" style="min-height:58vh;">
+    <ImagePlate hero image={img("jet-contact-hero")} caption="Dispatch / operations desk at night" />
+    <div class="jc-hero__scrim"></div>
+    <div class="jc-hero__inner">
+      <div class="jc-hero__col">
+        <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Order & Dispatch · 24/7</span>
+        <h1 class="type-h1" style="font-size:clamp(38px,5vw,60px); line-height:1.05; max-width:20ch;">Contact Our Private Jet Catering Dispatch Team</h1>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:60ch;">Submit flight details and F&B orders below, or call the dispatch desk directly. Quotes are returned within the hour, around the clock.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <div class="jc-contact">
+      <div>
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">Submit Your Flight Details and F&B Orders</span>
+        <h2 class="type-h2" style="margin:20px 0 30px;">Order or request a quote</h2>
+
+        <form data-contact-form method="POST" action={contactEndpoint || "#"} novalidate>
+          <div class="jc-form-grid">
+            <div class="luxury-field">
+              <input id="f-name" class="luxury-field__input" name="name" placeholder=" " required />
+              <label for="f-name" class="luxury-field__label">Full name</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-company" class="luxury-field__input" name="company" placeholder=" " />
+              <label for="f-company" class="luxury-field__label">Company / operator</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-email" type="email" class="luxury-field__input" name="email" placeholder=" " required />
+              <label for="f-email" class="luxury-field__label">Email</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-phone" class="luxury-field__input" name="phone" placeholder=" " required />
+              <label for="f-phone" class="luxury-field__label">Phone</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-tail" class="luxury-field__input" name="tail" placeholder=" " />
+              <label for="f-tail" class="luxury-field__label">Tail number / aircraft</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-airport" class="luxury-field__input" name="airport" placeholder=" " value="DPS / WADD" />
+              <label for="f-airport" class="luxury-field__label">Airport</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-dep" class="luxury-field__input" name="departure" placeholder=" " />
+              <label for="f-dep" class="luxury-field__label">Departure (date & time)</label>
+            </div>
+            <div class="luxury-field">
+              <input id="f-pax" class="luxury-field__input" name="pax" placeholder=" " />
+              <label for="f-pax" class="luxury-field__label">Passengers / crew</label>
+            </div>
+          </div>
+          <div class="luxury-field" style="margin-top:0;">
+            <input id="f-diet" class="luxury-field__input" name="diet" placeholder=" " />
+            <label for="f-diet" class="luxury-field__label">Dietary & allergen requirements</label>
+          </div>
+          <div class="luxury-field">
+            <textarea id="f-order" class="luxury-field__input" name="order" placeholder=" " required rows="4" style="resize:vertical;"></textarea>
+            <label for="f-order" class="luxury-field__label">Order details & special requests</label>
+          </div>
+          <p class="type-caption" style="margin:20px 0 0; color:var(--accent); opacity:0.6;">We will only use these details to prepare your quote and order — never anything more.</p>
+          <div style="margin-top:30px;">
+            <button type="submit" class="luxury-btn luxury-btn--solid luxury-btn--md">Send to Dispatch</button>
+          </div>
+        </form>
+
+        <div data-contact-success hidden style="border:0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); padding:50px;">
+          <span class="type-eyebrow" style="display:block; color:var(--accent);">Order received</span>
+          <h3 class="type-h3" style="margin:15px 0 0;">Thank you — dispatch has your details.</h3>
+          <p class="type-body-md" style="margin:15px 0 0; opacity:0.78; max-width:48ch;">A coordinator will confirm and return your quote within the hour. For an urgent departure, call the dispatch desk directly on +62 811 0000 000.</p>
+          <div style="margin-top:30px;">
+            <button type="button" class="luxury-btn luxury-btn--ghost luxury-btn--md" data-contact-reset>Submit Another</button>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">24/7 Urgent Order Hotlines for Aviation Crews</span>
+        <h2 class="type-h2" style="margin:20px 0 30px;">Dispatch desk</h2>
+        <div style="display:flex; flex-direction:column; gap:30px;">
+          <div>
+            <span class="type-eyebrow" style="opacity:0.6;">Hotline · 24/7</span>
+            <a href="tel:+628110000000" class="type-h3" style="display:block; margin-top:8px; text-decoration:none; color:var(--text-primary);">+62 811 0000 000</a>
+          </div>
+          <hr class="luxury-separator luxury-separator--h" />
+          <div>
+            <span class="type-eyebrow" style="opacity:0.6;">Email</span>
+            <a href="mailto:info@balijetcatering.com" class="type-body-lg" style="display:block; margin-top:8px; text-decoration:none; color:var(--text-primary);">info@balijetcatering.com</a>
+          </div>
+          <hr class="luxury-separator luxury-separator--h" />
+          <div>
+            <span class="type-eyebrow" style="opacity:0.6;">Delivery</span>
+            <p class="type-body-md" style="margin:8px 0 0;">ExecuJet General Aviation Terminal<br />Ngurah Rai Intl (DPS / WADD), Bali</p>
+          </div>
+          <hr class="luxury-separator luxury-separator--h" />
+          <div>
+            <span class="type-eyebrow" style="opacity:0.6;">Response</span>
+            <p class="type-body-md" style="margin:8px 0 0;">Quotes within the hour, around the clock. Last-minute manifest changes expected and handled.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <SisterBrands
+    current="jet"
+    heading="Operating on the water?"
+    intro="Catering or provisioning a yacht or superyacht in Bali? Our sister brands deliver the same standard dockside."
+  />
+</PageLayout>
+
+<script>
+  // Order form. With PUBLIC_CONTACT_ENDPOINT set, posts via fetch and shows the
+  // confirmation panel; without it, runs in demo mode (confirm UI only, no send)
+  // to mirror the original design preview. TODO: confirm provider, then rely on
+  // the configured endpoint (and remove demo mode if a redirect flow is used).
+  (function () {
+    const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+    const success = document.querySelector<HTMLElement>("[data-contact-success]");
+    const reset = document.querySelector<HTMLElement>("[data-contact-reset]");
+    if (!form || !success) return;
+
+    const showSuccess = () => {
+      form.hidden = true;
+      success.hidden = false;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const endpoint = form.getAttribute("action");
+      if (endpoint && endpoint !== "#") {
+        try {
+          await fetch(endpoint, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          });
+        } catch {
+          /* swallow — still confirm; provider may also redirect */
+        }
+      }
+      showSuccess();
+    });
+
+    reset?.addEventListener("click", () => {
+      success.hidden = true;
+      form.hidden = false;
+      form.reset();
+    });
+  })();
+</script>

@@ -1,0 +1,35 @@
+---
+/* =====================================================================
+   SisterBrands — the recurring cross-link section. Shows the three group
+   brands other than the current one. Heading/intro are per-page props.
+   ===================================================================== */
+import { SISTER_BRANDS } from "../sister-brands";
+
+export interface Props {
+  /** Current site key, excluded from the list (e.g. "jet"). */
+  current: string;
+  heading?: string;
+  intro?: string;
+}
+const { current, heading = "Our sister brands", intro } = Astro.props;
+const others = SISTER_BRANDS.filter((b) => b.key !== current);
+---
+<section class="section-tone--tint Section">
+  <span class="type-eyebrow" style="display:block; color:var(--accent);">Sister Brands</span>
+  <h2 class="type-h2" style="margin:20px 0 0;">{heading}</h2>
+  {intro && <p class="type-body-md" style="margin:20px 0 0; max-width:60ch;">{intro}</p>}
+  <div class="jc-xgrid jc-xgrid--3" style="margin-top:40px;">
+    {
+      others.map((b) => (
+        <a class="jc-xcard" href={b.href} target="_blank" rel="noopener">
+          <span class="type-eyebrow" style="color:var(--accent);">{b.domain}</span>
+          <h3 class="type-h3" style="margin:15px 0 0;">{b.name}</h3>
+          <p class="type-body-md" style="margin:10px 0 0; opacity:0.72;">{b.desc}</p>
+          <span class="type-eyebrow" style="color:var(--accent); margin-top:24px; display:inline-block;">
+            Visit Site &rarr;
+          </span>
+        </a>
+      ))
+    }
+  </div>
+</section>
