@@ -421,7 +421,7 @@ a:hover .luxury-icon { opacity: 1; }
 .luxury-header__link[aria-current="page"]:hover::after { transform: translateX(-50%) scaleX(0); opacity: 0; }
 /* HOVER (default only): weight unchanged — only the center line reveals. */
 .luxury-header__link:not([aria-current="page"]):hover::after { transform: translateX(-50%) scaleX(1); opacity: 1; }
-.luxury-header__actions { display: flex; align-items: center; justify-content: center; justify-self: center; grid-column: 3; gap: var(--space-20); }
+.luxury-header__actions { display: flex; align-items: center; justify-content: flex-end; justify-self: end; grid-column: 3; gap: var(--space-20); }
 .luxury-header__actions .luxury-btn { width: var(--cta-width); }   /* tokenized CTA width — no sub-pixel */
 /* Social icon sits at full opacity to match the nav links (not the muted 60%). */
 .luxury-header__actions .luxury-icon { opacity: 1; }
