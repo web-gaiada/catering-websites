@@ -51,10 +51,13 @@ export interface Brand {
   nav: NavItem[];
   /** Header / drawer call-to-action button. */
   cta: { label: string; href: string };
+  /** Social links, rendered as icons in the header bar + mobile drawer. */
+  social: SocialLink[];
+  /** WhatsApp number (international, digits only) for the floating contact button. */
+  whatsapp?: string;
   footer: {
     columns: FooterColumn[];
     address: BrandAddress;
-    social: SocialLink[];
     /** Full text of the © line (Roman-numeral year per the brand voice). */
     copyright: string;
   };

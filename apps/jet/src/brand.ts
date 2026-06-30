@@ -7,13 +7,14 @@ export const jet: Brand = {
   name: "Bali Jet Catering",
   domain: "balijetcatering.com",
   nav: [
-    { key: "home", label: "Home", href: "/" },
     { key: "menus", label: "Inflight Menus", href: "/inflight-menus" },
     { key: "operations", label: "Airside Operations", href: "/airside-operations" },
     { key: "contact", label: "Order & Dispatch", href: "/contact" },
     { key: "insights", label: "Insights", href: "/insights" },
   ],
   cta: { label: "Request a Quote", href: "/contact" },
+  social: [{ label: "LinkedIn", href: "#", icon: "linkedin" }],
+  whatsapp: "6281138210187",
   footer: {
     columns: [
       {
@@ -44,10 +45,9 @@ export const jet: Brand = {
     ],
     address: {
       lines: ["Komplek Ruko Wayang Sanur", "Jl. Bypass Ngurah Rai, Sanur, Bali 80227"],
-      phone: { label: "+62 811 0000 000 · 24/7 Dispatch", href: "tel:+628110000000" },
+      phone: { label: "+62 811 3821 0187 · 24/7 Dispatch", href: "tel:+6281138210187" },
       email: { label: "info@balijetcatering.com", href: "mailto:info@balijetcatering.com" },
     },
-    social: [{ label: "LinkedIn", href: "#", icon: "linkedin" }],
     copyright:
       "&copy; MMXXVI Bali Jet Catering &middot; Private aviation inflight catering, Bali Ngurah Rai (DPS / WADD). All rights reserved.",
   },

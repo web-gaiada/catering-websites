@@ -7,13 +7,14 @@ export const provisioning: Brand = {
   name: "Bali Yacht Provisioning",
   domain: "baliyachtprovisioning.com",
   nav: [
-    { key: "home", label: "Home", href: "/" },
     { key: "categories", label: "Provisioning Categories", href: "/categories" },
     { key: "logistics", label: "Port Logistics", href: "/port-logistics" },
     { key: "manifest", label: "Submit Manifest", href: "/manifest" },
     { key: "insights", label: "Insights", href: "/insights" },
   ],
   cta: { label: "Submit Manifest", href: "/manifest" },
+  social: [{ label: "LinkedIn", href: "#", icon: "linkedin" }],
+  whatsapp: "6281138210187",
   footer: {
     columns: [
       {
@@ -44,10 +45,9 @@ export const provisioning: Brand = {
     ],
     address: {
       lines: ["Komplek Ruko Wayang Sanur", "Jl. Bypass Ngurah Rai, Sanur, Bali 80227"],
-      phone: { label: "+62 811 0000 222", href: "tel:+628110000222" },
+      phone: { label: "+62 811 3821 0187", href: "tel:+6281138210187" },
       email: { label: "info@baliyachtprovisioning.com", href: "mailto:info@baliyachtprovisioning.com" },
     },
-    social: [{ label: "LinkedIn", href: "#", icon: "linkedin" }],
     copyright:
       "&copy; MMXXVI Bali Yacht Provisioning &middot; Superyacht provisioning &amp; maritime F&amp;B procurement, Benoa Marina, Bali. All rights reserved.",
   },

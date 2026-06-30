@@ -303,6 +303,7 @@ a:hover .luxury-icon { opacity: 1; }
 }
 .luxury-header--overlay .luxury-header__logo-word { color: var(--brand-color-bg); }
 .luxury-header--overlay .luxury-header__link      { color: var(--brand-color-bg); opacity: 1; }
+.luxury-header--overlay .luxury-icon-btn          { color: var(--brand-color-bg); }
 .luxury-header--overlay .luxury-header__link:hover,
 .luxury-header--overlay .luxury-header__link[aria-current="page"] { opacity: 1; }
 /* ACTIVE — UNIFIED color across BOTH header states (transparent hero +
@@ -336,6 +337,7 @@ a:hover .luxury-icon { opacity: 1; }
 }
 .luxury-header.is-scrolled .luxury-header__logo-word { color: var(--brand-color-text-dark); }
 .luxury-header.is-scrolled .luxury-header__link      { color: var(--brand-color-text-dark); opacity: 1; }
+.luxury-header.is-scrolled .luxury-icon-btn          { color: var(--brand-color-text-dark); }
 .luxury-header.is-scrolled .luxury-header__link:hover,
 .luxury-header.is-scrolled .luxury-header__link[aria-current="page"] { opacity: 1; }
 /* ACTIVE — unified champagne secondary, identical to the overlay state. */
@@ -421,6 +423,8 @@ a:hover .luxury-icon { opacity: 1; }
 .luxury-header__link:not([aria-current="page"]):hover::after { transform: translateX(-50%) scaleX(1); opacity: 1; }
 .luxury-header__actions { display: flex; align-items: center; justify-content: flex-end; justify-self: end; grid-column: 3; gap: var(--space-20); }
 .luxury-header__actions .luxury-btn { width: var(--cta-width); }   /* tokenized CTA width — no sub-pixel */
+/* Social icon sits at full opacity to match the nav links (not the muted 60%). */
+.luxury-header__actions .luxury-icon { opacity: 1; }
 
 /* ---------------------------------------------------------------------
    HAMBURGER + SLIDE-OUT DRAWER (≤1024px) — desktop hides all of this
@@ -545,6 +549,10 @@ a:hover .luxury-icon { opacity: 1; }
 .luxury-nav-drawer__link[aria-current="page"] { font-weight: var(--weight-bold); color: var(--brand-color-secondary); }
 .luxury-nav-drawer__actions { margin-top: var(--space-40); }
 .luxury-nav-drawer__actions .luxury-btn { width: 100%; }
+/* Social icon row under the drawer CTA (mobile counterpart to the header bar). */
+.luxury-nav-drawer__social { display: flex; align-items: center; justify-content: center; gap: var(--space-20); margin-top: var(--space-30); }
+/* Match the drawer menu links: full opacity, same --text-primary ink (not muted 60%). */
+.luxury-nav-drawer__social .luxury-icon { opacity: 1; }
 
 /* ---------------------------------------------------------------------
    FOOTER  — editorial multi-column (brand + address left, link columns right)

@@ -7,13 +7,14 @@ export const yacht: Brand = {
   name: "Bali Yacht Catering",
   domain: "baliyachtcatering.com",
   nav: [
-    { key: "home", label: "Home", href: "/" },
     { key: "menus", label: "Cruise & Event Menus", href: "/menus" },
     { key: "chefs", label: "Onboard Chefs", href: "/onboard-chefs" },
     { key: "booking", label: "Booking", href: "/booking" },
     { key: "insights", label: "Insights", href: "/insights" },
   ],
   cta: { label: "Request a Quote", href: "/booking" },
+  social: [{ label: "Facebook", href: "#", icon: "facebook" }],
+  whatsapp: "6281138210187",
   footer: {
     columns: [
       {
@@ -44,10 +45,9 @@ export const yacht: Brand = {
     ],
     address: {
       lines: ["Komplek Ruko Wayang Sanur", "Jl. Bypass Ngurah Rai, Sanur, Bali 80227"],
-      phone: { label: "+62 811 0000 111", href: "tel:+628110000111" },
+      phone: { label: "+62 811 3821 0187", href: "tel:+6281138210187" },
       email: { label: "info@baliyachtcatering.com", href: "mailto:info@baliyachtcatering.com" },
     },
-    social: [{ label: "Facebook", href: "#", icon: "facebook" }],
     copyright:
       "&copy; MMXXVI Bali Yacht Catering &middot; Luxury yacht &amp; private boat event catering, Bali. All rights reserved.",
   },

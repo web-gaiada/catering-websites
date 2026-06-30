@@ -7,6 +7,7 @@
 import BaseLayout from "./BaseLayout.astro";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
+import WhatsAppFab from "./WhatsAppFab.astro";
 import type { Brand } from "../brand";
 
 export interface Props {
@@ -41,4 +42,5 @@ const { brand, current, cta, title, description, canonical, ogType, robots, geo,
     <slot />
   </main>
   <Footer brand={brand} />
+  {brand.whatsapp && <WhatsAppFab number={brand.whatsapp} />}
 </BaseLayout>

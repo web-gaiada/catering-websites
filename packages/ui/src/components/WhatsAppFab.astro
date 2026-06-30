@@ -1,0 +1,66 @@
+---
+/* =====================================================================
+   WhatsAppFab — floating "chat on WhatsApp" button, fixed bottom-right.
+   Rendered once per page by PageLayout when the Brand defines `whatsapp`.
+   Self-contained (scoped style + inlined glyph) — CSP-safe, no CDN.
+   ===================================================================== */
+export interface Props {
+  /** International number, digits only (e.g. "6281138210187"). */
+  number: string;
+  /** Optional prefilled message. */
+  message?: string;
+  label?: string;
+}
+const { number, message, label = "Chat with us on WhatsApp" } = Astro.props;
+const href = `https://wa.me/${number}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
+---
+<a class="wa-fab" href={href} target="_blank" rel="noopener" aria-label={label}>
+  <svg class="wa-fab__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path
+      fill="currentColor"
+      d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.86 9.86 0 0 0 4.74 1.21h.004c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.16c-.24.68-1.42 1.31-1.96 1.36-.5.05-1.13.27-3.8-.79-3.2-1.26-5.24-4.49-5.4-4.7-.16-.21-1.3-1.73-1.3-3.3 0-1.56.82-2.33 1.11-2.65.29-.32.63-.4.84-.4l.6.01c.19.01.45-.07.7.54.24.61.83 2.11.9 2.26.07.15.12.33.02.53-.1.2-.15.32-.3.49-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.36 1.46.29.15.46.13.63-.08.17-.21.73-.85.92-1.14.19-.29.39-.24.65-.15.27.1 1.71.81 2 .96.29.15.49.22.56.34.07.12.07.7-.17 1.38Z"
+    ></path>
+  </svg>
+</a>
+
+<style>
+  .wa-fab {
+    position: fixed;
+    right: clamp(18px, 4vw, 32px);
+    bottom: clamp(18px, 4vw, 32px);
+    z-index: 90; /* below sticky header (100) + mobile drawer (9998/9999) */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background-color: #25d366;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+    transition:
+      transform var(--dur-base, 0.24s) var(--ease-luxury, ease),
+      box-shadow var(--dur-base, 0.24s) var(--ease-luxury, ease);
+  }
+  .wa-fab:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+  }
+  .wa-fab:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+  }
+  .wa-fab__icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wa-fab {
+      transition: none;
+    }
+    .wa-fab:hover {
+      transform: none;
+    }
+  }
+</style>
