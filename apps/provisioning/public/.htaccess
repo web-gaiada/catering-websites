@@ -1,0 +1,4 @@
+# Serve the site's custom 404 page for unknown URLs.
+# Astro builds the page to /404.html; LiteSpeed/Apache (Hostinger) needs this
+# directive to return it instead of the host's generic 404.
+ErrorDocument 404 /404.html
