@@ -43,15 +43,45 @@ const headerClasses = [
     </a>
     <nav class="luxury-header__nav" aria-label="Primary">
       {
-        brand.nav.map((item) => (
-          <a
-            class="luxury-header__link"
-            href={item.href}
-            aria-current={item.key === current ? "page" : undefined}
-          >
-            {item.label}
-          </a>
-        ))
+        brand.nav.map((item) => {
+          const groupActive =
+            item.key === current || item.children?.some((c) => c.key === current);
+          return item.children && item.children.length > 0 ? (
+            <div class="luxury-header__navitem luxury-header__navitem--menu">
+              <button
+                type="button"
+                class="luxury-header__link luxury-header__link--menu"
+                aria-current={groupActive ? "page" : undefined}
+                aria-haspopup="true"
+                aria-expanded="false"
+                data-dropdown-toggle
+              >
+                {item.label}
+                <span class="luxury-header__caret" aria-hidden="true"></span>
+              </button>
+              <div class="luxury-header__submenu" role="menu">
+                {item.children.map((child) => (
+                  <a
+                    class="luxury-header__submenu-link"
+                    href={child.href}
+                    role="menuitem"
+                    aria-current={child.key === current ? "page" : undefined}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              class="luxury-header__link"
+              href={item.href}
+              aria-current={item.key === current ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })
       }
     </nav>
     <div class="luxury-header__actions">
@@ -80,15 +110,43 @@ const headerClasses = [
     </button>
     <nav class="luxury-nav-drawer__links" aria-label="Mobile">
       {
-        brand.nav.map((item) => (
-          <a
-            class="luxury-nav-drawer__link"
-            href={item.href}
-            aria-current={item.key === current ? "page" : undefined}
-          >
-            {item.label}
-          </a>
-        ))
+        brand.nav.map((item) =>
+          item.children && item.children.length > 0 ? (
+            <div class="luxury-nav-drawer__group">
+              <button
+                type="button"
+                class="luxury-nav-drawer__grouplabel"
+                data-drawer-group-toggle
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                {item.label}
+                <span class="luxury-nav-drawer__caret" aria-hidden="true"></span>
+              </button>
+              <div class="luxury-nav-drawer__sublinks">
+                <div class="luxury-nav-drawer__sublinks-inner">
+                  {item.children.map((child) => (
+                    <a
+                      class="luxury-nav-drawer__link luxury-nav-drawer__sublink"
+                      href={child.href}
+                      aria-current={child.key === current ? "page" : undefined}
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a
+              class="luxury-nav-drawer__link"
+              href={item.href}
+              aria-current={item.key === current ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          )
+        )
       }
     </nav>
     <div class="luxury-nav-drawer__actions">
@@ -155,8 +213,59 @@ const headerClasses = [
     );
     // Tapping a drawer link navigates; close so it isn't left open on return.
     drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", close));
+    // Dropdown groups in the drawer: the label toggles its sublinks open/closed.
+    drawer.querySelectorAll("[data-drawer-group-toggle]").forEach((toggle) => {
+      toggle.addEventListener("click", () => {
+        const group = toggle.closest<HTMLElement>(".luxury-nav-drawer__group");
+        if (!group) return;
+        const willOpen = !group.classList.contains("is-open");
+        group.classList.toggle("is-open", willOpen);
+        toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      });
+    });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && !root.hidden) close();
+    });
+  })();
+
+  // Desktop dropdown: the parent is a toggle button, not a link. It is closed by
+  // default; a click opens/closes the panel. Escape and an outside click close
+  // any open menu.
+  (function () {
+    const toggles = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-dropdown-toggle]"),
+    );
+    if (!toggles.length) return;
+
+    const itemOf = (t: Element) => t.closest<HTMLElement>(".luxury-header__navitem");
+    const closeAll = (except?: HTMLElement | null) => {
+      toggles.forEach((t) => {
+        const item = itemOf(t);
+        if (!item || item === except) return;
+        item.classList.remove("is-open");
+        t.setAttribute("aria-expanded", "false");
+      });
+    };
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener("click", () => {
+        const item = itemOf(toggle);
+        if (!item) return;
+        const willOpen = !item.classList.contains("is-open");
+        closeAll(item);
+        item.classList.toggle("is-open", willOpen);
+        toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element) || !target.closest(".luxury-header__navitem--menu")) {
+        closeAll();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAll();
     });
   })();
 </script>

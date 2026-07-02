@@ -13,6 +13,9 @@ export interface NavItem {
   label: string;
   /** Site-relative path, e.g. "/menus". */
   href: string;
+  /** Optional sub-pages. When present, this item renders as a dropdown
+   *  (desktop hover/focus panel + indented links in the mobile drawer). */
+  children?: NavItem[];
 }
 
 export interface FooterLink {

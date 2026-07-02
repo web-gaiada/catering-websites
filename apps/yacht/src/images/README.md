@@ -15,12 +15,13 @@ Formats accepted: `.jpg` `.jpeg` `.png` `.webp` `.avif`
 | `yacht-menus-plate1`  | Cruise & Event Menus · split| Live BBQ / plated dining at anchor | ~4:3             |
 | `yacht-chefs-hero`    | Onboard Chefs · hero       | Chef plating onboard / crew service | Landscape (hero) |
 | `yacht-chefs-plate1`  | Onboard Chefs · split      | Chef / galley / plating detail      | ~4:3             |
+| `yacht-mixologist`    | Onboard Chefs · mixology   | Mixologist / marine bar / cocktail  | ~4:3             |
 | `yacht-booking-hero`  | Booking · hero             | Guests dining on deck at sunset     | Landscape (hero) |
 | `yacht-insights-hero`    | Insights · hero          | Table set on deck at golden hour  | Landscape (hero) |
-| `yacht-insights-feature` | Insights · feature       | Sunset canapés on deck            | ~4:3             |
-| `yacht-insights-grazing` | Insights · article card  | Grazing platter on a catamaran    | ~3:2             |
-| `yacht-insights-cocktail`| Insights · article card  | Cocktail / bar setup onboard      | ~3:2             |
-| `yacht-insights-chef`    | Insights · article card  | Chef plating onboard              | ~3:2             |
+| `yacht-sunset-canapes` | Insights · feature       | Sunset canapés on deck            | ~4:3             |
+| `yacht-grazing-platter` | Insights · article card  | Grazing platter on a catamaran    | ~3:2             |
+| `yacht-cocktail`| Insights · article card  | Cocktail / bar setup onboard      | ~3:2             |
+| `yacht-chef-plating`    | Insights · article card  | Chef plating onboard              | ~3:2             |
 
 **Sizes:** heroes ≥ 1600px wide (landscape); plates ≥ 1000px wide (~4:3).
 Example: drop `yacht-home-hero.jpg` here and the home hero photo appears.

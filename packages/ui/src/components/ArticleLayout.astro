@@ -1,0 +1,131 @@
+---
+/* =====================================================================
+   ArticleLayout — the shared single-article (blog post) template. Wraps
+   PageLayout with a dark image hero, a prose body rendered from the
+   Article's blocks, a closing CTA and the SisterBrands cross-link.
+   A per-site dynamic route (src/pages/insights/[slug].astro) resolves the
+   article's image slot and passes it in as `image`.
+   ===================================================================== */
+import PageLayout from "./PageLayout.astro";
+import ImagePlate from "./ImagePlate.astro";
+import SisterBrands from "./SisterBrands.astro";
+import type { Brand } from "../brand";
+import type { Article } from "../article";
+import type { ImageMetadata } from "astro";
+
+/** A sibling article for the "More insights" nav, with its image resolved. */
+export interface RelatedArticle {
+  slug: string;
+  title: string;
+  category: string;
+  readTime: string;
+  excerpt: string;
+  image?: ImageMetadata;
+  ratio?: string;
+}
+
+export interface Props {
+  brand: Brand;
+  article: Article;
+  /** Resolved hero photo for the article's image slot (placeholder if absent). */
+  image?: ImageMetadata;
+  geo?: { region?: string; placename?: string; position?: string };
+  /** Closing CTA (defaults to the brand CTA with a neutral headline). */
+  cta?: { heading?: string; label?: string; href?: string };
+  /** SisterBrands section copy. */
+  sister?: { heading?: string; intro?: string };
+  /** Other articles to surface as navigation at the foot of the post. */
+  related?: RelatedArticle[];
+}
+const { brand, article, image, geo, cta, sister, related = [] } = Astro.props;
+const moreArticles = related.slice(0, 3);
+const canonical = `https://${brand.domain}/insights/${article.slug}`;
+const ctaHeading = cta?.heading ?? "Planning something? Let’s shape it around your day.";
+const ctaLabel = cta?.label ?? brand.cta.label;
+const ctaHref = cta?.href ?? brand.cta.href;
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.excerpt,
+    url: canonical,
+    articleSection: article.category,
+    publisher: { "@type": "Organization", name: brand.name, url: `https://${brand.domain}` },
+  },
+];
+---
+<PageLayout
+  brand={brand}
+  current="insights"
+  title={`${article.title} | ${brand.name}`}
+  description={article.excerpt}
+  canonical={canonical}
+  ogType="article"
+  geo={geo}
+  jsonLd={jsonLd}
+>
+  <article>
+    <section class="jc-hero section-tone--dark" data-screen-label={`${brand.name} · Article`} style="min-height:60vh;">
+      <ImagePlate hero image={image} caption={article.title} />
+      <div class="jc-hero__scrim"></div>
+      <div class="jc-hero__inner">
+        <div class="jc-hero__col">
+          <span class="type-eyebrow" style="display:block; margin-bottom:24px; opacity:0.82;">{article.category} &middot; {article.readTime}</span>
+          <h1 class="type-h1" style="font-size:clamp(32px,4.5vw,56px); line-height:1.06; max-width:20ch;">{article.title}</h1>
+          <p class="type-body-lg" style="opacity:0.84; margin-top:26px; max-width:60ch;">{article.excerpt}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tone--paper Section">
+      <div style="max-width:940px; margin:0 auto;">
+        {
+          article.body.map((block) => (
+            <div style="margin-bottom:10px;">
+              {block.heading && (
+                <h2 class="type-h2" style="margin:36px 0 20px; font-size:clamp(24px,3vw,34px); line-height:1.16;">
+                  {block.heading}
+                </h2>
+              )}
+              {block.paragraphs.map((p) => (
+                <p class="type-body-lg" style="opacity:0.86; margin:0 0 24px;">{p}</p>
+              ))}
+            </div>
+          ))
+        }
+        <a class="type-eyebrow jc-read" href="/insights" style="display:inline-block; margin-top:20px; color:var(--accent);">&larr; Back to Insights</a>
+      </div>
+    </section>
+
+    {
+      moreArticles.length > 0 && (
+        <section class="section-tone--tint Section">
+          <span class="type-eyebrow" style="display:block; color:var(--accent);">Keep reading</span>
+          <h2 class="type-h2" style="margin:20px 0 0;">More insights</h2>
+          <div class="luxury-card-grid" style={`--cols:${moreArticles.length}; margin-top:50px;`}>
+            {moreArticles.map((r) => (
+              <a class="jc-article-card" href={`/insights/${r.slug}`}>
+                <ImagePlate image={r.image} caption={r.title} ratio={r.ratio ?? "3 / 2"} />
+                <div class="jc-article-card__body">
+                  <span class="type-eyebrow" style="display:block; color:var(--accent);">{r.category} &middot; {r.readTime}</span>
+                  <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">{r.title}</h3>
+                  <p class="type-body-md" style="opacity:0.74; margin:12px 0 0;">{r.excerpt}</p>
+                  <span class="type-eyebrow jc-read">Read article &rarr;</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="section-tone--dark Section" style="text-align:center;">
+      <h2 class="type-h2" style="font-size:clamp(26px,4vw,42px); line-height:1.14; max-width:24ch; margin:0 auto;">{ctaHeading}</h2>
+      <div style="margin-top:40px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href={ctaHref}>{ctaLabel}</a></div>
+    </section>
+
+    <SisterBrands current={brand.key} heading={sister?.heading} intro={sister?.intro} />
+  </article>
+</PageLayout>

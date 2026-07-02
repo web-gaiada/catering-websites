@@ -1,7 +1,7 @@
 import type { Brand } from "@bali/ui/brand";
 import { SITE_URLS } from "@bali/ui/site-urls";
 
-/** Bali Yacht Provisioning — baliyachtprovisioning.com */
+/** Bali Yacht Provisioning | baliyachtprovisioning.com */
 export const provisioning: Brand = {
   key: "prov",
   name: "Bali Yacht Provisioning",
@@ -12,7 +12,7 @@ export const provisioning: Brand = {
     { key: "manifest", label: "Submit Manifest", href: "/manifest" },
     { key: "insights", label: "Insights", href: "/insights" },
   ],
-  cta: { label: "Submit Manifest", href: "/manifest" },
+  cta: { label: "Submit Manifest", href: "/manifest#custom-lists" },
   social: [{ label: "LinkedIn", href: "#", icon: "linkedin" }],
   whatsapp: "6281138210187",
   footer: {

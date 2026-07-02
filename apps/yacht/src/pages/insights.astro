@@ -9,9 +9,9 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: "Bali Yacht Catering — Insights",
+    name: "Bali Yacht Catering | Insights",
     description:
-      "Notes from the galley and the deck — sunset menus, marine mixology and onboard dining craft from Bali Yacht Catering.",
+      "Notes from the galley and the deck: sunset menus, marine mixology and onboard dining craft from Bali Yacht Catering.",
     url: "https://baliyachtcatering.com/insights",
     publisher: { "@type": "Organization", name: "Bali Yacht Catering", url: "https://baliyachtcatering.com" },
     blogPost: [
@@ -44,7 +44,7 @@ const jsonLd = [
   brand={yacht}
   current="insights"
   title="Insights & Ocean Journals | Luxury Yacht Catering Bali"
-  description="Notes from the galley and the deck — sunset menus, marine mixology and onboard dining craft from Bali Yacht Catering across the island's charters and anchorages."
+  description="Notes from the galley and the deck: sunset menus, marine mixology and onboard dining craft from Bali Yacht Catering across the island's charters and anchorages."
   canonical="https://baliyachtcatering.com/insights"
   geo={yachtGeo}
   jsonLd={jsonLd}
@@ -56,7 +56,7 @@ const jsonLd = [
       <div class="jc-hero__col">
         <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Insights · Bali Yacht Catering</span>
         <h1 class="type-h1" style="font-size:clamp(38px,5vw,62px); line-height:1.05; max-width:16ch;">Insights & ocean journals</h1>
-        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:58ch;">Menus, mixology and the craft of dining on the water — notes from our chefs and crew across Bali’s charters, sunset cruises and anchorages.</p>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:58ch;">Menus, mixology and the craft of dining on the water: notes from our chefs and crew across Bali’s charters, sunset cruises and anchorages.</p>
         <div class="jc-meta" style="margin-top:50px;">
           <span class="type-eyebrow">Menus</span>
           <span class="type-eyebrow dot">/</span>
@@ -73,8 +73,8 @@ const jsonLd = [
   <section class="section-tone--paper Section">
     <span class="type-eyebrow" style="display:block; color:var(--accent);">Latest from the maison</span>
     <h2 class="type-h2" style="margin:20px 0 50px; max-width:22ch;">Dining that belongs to the water</h2>
-    <a class="jc-article-feature" href="#">
-      <ImagePlate image={img("yacht-insights-feature")} caption="Sunset canapés on deck" ratio="4 / 3" />
+    <a class="jc-article-feature" href="/insights/composing-a-sunset-menu-for-the-indian-ocean">
+      <ImagePlate image={img("yacht-sunset-canapes")} caption="Sunset canapés on deck" ratio="4 / 3" />
       <div class="jc-article-feature__text">
         <span class="type-eyebrow" style="display:block; color:var(--accent);">Menus · 5 min read</span>
         <h3 class="type-h2" style="margin:18px 0 0; font-size:clamp(26px,3vw,38px); line-height:1.12;">Composing a sunset menu for the Indian Ocean</h3>
@@ -88,8 +88,8 @@ const jsonLd = [
     <span class="type-eyebrow" style="display:block; color:var(--accent);">More reading</span>
     <h2 class="type-h2" style="margin:20px 0 0;">From the galley and the deck</h2>
     <div class="luxury-card-grid" style="--cols:3; margin-top:50px;">
-      <a class="jc-article-card" href="#">
-        <ImagePlate image={img("yacht-insights-grazing")} caption="Grazing platter on a catamaran" ratio="3 / 2" />
+      <a class="jc-article-card" href="/insights/barefoot-canapes-dining-under-sail">
+        <ImagePlate image={img("yacht-grazing-platter")} caption="Grazing platter on a catamaran" ratio="3 / 2" />
         <div class="jc-article-card__body">
           <span class="type-eyebrow" style="display:block; color:var(--accent);">On the Water · 4 min read</span>
           <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">Barefoot canapés: dining under sail</h3>
@@ -97,8 +97,8 @@ const jsonLd = [
           <span class="type-eyebrow jc-read">Read article &rarr;</span>
         </div>
       </a>
-      <a class="jc-article-card" href="#">
-        <ImagePlate image={img("yacht-insights-cocktail")} caption="Cocktail / bar setup onboard" ratio="3 / 2" />
+      <a class="jc-article-card" href="/insights/marine-mixology-a-bar-that-holds-its-line-in-a-swell">
+        <ImagePlate image={img("yacht-cocktail")} caption="Cocktail / bar setup onboard" ratio="3 / 2" />
         <div class="jc-article-card__body">
           <span class="type-eyebrow" style="display:block; color:var(--accent);">Bar · 3 min read</span>
           <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">Marine mixology: a bar that holds its line in a swell</h3>
@@ -106,8 +106,8 @@ const jsonLd = [
           <span class="type-eyebrow jc-read">Read article &rarr;</span>
         </div>
       </a>
-      <a class="jc-article-card" href="#">
-        <ImagePlate image={img("yacht-insights-chef")} caption="Chef plating onboard" ratio="3 / 2" />
+      <a class="jc-article-card" href="/insights/plating-at-anchor-when-the-galley-moves">
+        <ImagePlate image={img("yacht-chef-plating")} caption="Chef plating onboard" ratio="3 / 2" />
         <div class="jc-article-card__body">
           <span class="type-eyebrow" style="display:block; color:var(--accent);">Craft · 5 min read</span>
           <h3 class="type-h3" style="font-size:22px; line-height:1.28; margin:14px 0 0;">Plating at anchor, when the galley moves</h3>
@@ -122,12 +122,12 @@ const jsonLd = [
     <span class="type-eyebrow" style="display:block; opacity:0.82;">The Journal</span>
     <h2 class="type-h2" style="font-size:clamp(28px,4vw,46px); line-height:1.12; max-width:26ch; margin:30px auto 0;">Notes from the galley, the deck and the last light on the water.</h2>
     <p class="type-body-lg" style="opacity:0.82; max-width:58ch; margin:30px auto 0;">Planning a charter or a celebration at sea? We will shape the menu around your day.</p>
-    <div style="margin-top:50px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/booking">Book Your Experience</a></div>
+    <div style="margin-top:50px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/booking#book-luxury-yacht">Book Your Experience</a></div>
   </section>
 
   <SisterBrands
     current="yacht"
     heading="Flying private or running a superyacht?"
-    intro="Our sister brands deliver the same standard in the air and at the dock — from private jet catering to full superyacht provisioning."
+    intro="Our sister brands deliver the same standard in the air and at the dock, from private jet catering to full superyacht provisioning."
   />
 </PageLayout>

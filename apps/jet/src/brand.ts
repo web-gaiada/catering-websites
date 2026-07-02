@@ -7,12 +7,21 @@ export const jet: Brand = {
   name: "Bali Jet Catering",
   domain: "balijetcatering.com",
   nav: [
-    { key: "menus", label: "Inflight Menus", href: "/inflight-menus" },
+    {
+      key: "menus",
+      label: "Menus & Catering",
+      href: "/inflight-menus",
+      children: [
+        { key: "menus", label: "Inflight Menus", href: "/inflight-menus" },
+        { key: "specialized", label: "Dietary & Allergen-Safe", href: "/dietary-and-allergen-safe" },
+        { key: "crew", label: "Crew & Provisioning", href: "/crew-and-provisioning" },
+      ],
+    },
     { key: "operations", label: "Airside Operations", href: "/airside-operations" },
     { key: "contact", label: "Order & Dispatch", href: "/contact" },
     { key: "insights", label: "Insights", href: "/insights" },
   ],
-  cta: { label: "Request a Quote", href: "/contact" },
+  cta: { label: "Request a Quote", href: "/contact#contact" },
   social: [{ label: "LinkedIn", href: "#", icon: "linkedin" }],
   whatsapp: "6281138210187",
   footer: {
@@ -21,8 +30,8 @@ export const jet: Brand = {
         title: "Catering",
         links: [
           { label: "Inflight Menus", href: "/inflight-menus" },
-          { label: "Dietary & Allergen", href: "/inflight-menus" },
-          { label: "Crew Catering", href: "/inflight-menus" },
+          { label: "Specialized & Allergen-Safe", href: "/dietary-and-allergen-safe" },
+          { label: "Crew, Cabin & Provisioning", href: "/crew-and-provisioning" },
         ],
       },
       {

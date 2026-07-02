@@ -5,14 +5,14 @@ import SisterBrands from "@bali/ui/components/SisterBrands.astro";
 import { provisioning, provGeo } from "../brand";
 import { img } from "../lib/images";
 
-// Manifest submission destination — see the inline script at the bottom.
+// Manifest submission destination, see the inline script at the bottom.
 const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
 
 const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    name: "Submit Provisioning Order & Manifest — Bali Yacht Provisioning",
+    name: "Submit Provisioning Order & Manifest | Bali Yacht Provisioning",
     url: "https://baliyachtprovisioning.com/manifest",
     description: "Submit a superyacht provisioning manifest or shopping list for fast, accurate B2B procurement processing in Bali.",
     mainEntity: {
@@ -54,7 +54,7 @@ const jsonLd = [
     </div>
   </section>
 
-  <section class="section-tone--paper Section">
+  <section id="custom-lists" class="section-tone--paper Section">
     <div class="jc-contact">
       <div>
         <span class="type-eyebrow" style="display:block; color:var(--accent);">Request Quote or Upload Custom Shopping Lists</span>
@@ -101,9 +101,10 @@ const jsonLd = [
           </div>
           <div style="margin-top:30px;">
             <span class="type-eyebrow" style="display:block; color:var(--accent); opacity:0.8; margin-bottom:12px;">Attach manifest (CSV, XLS, PDF)</span>
+            <p class="type-body-md" style="margin:0 0 14px; opacity:0.78;">No list yet? <a href="/bali-yacht-provisioning-manifest-template.xlsx" download style="color:var(--accent); text-decoration:underline;">Download our manifest form (Excel)</a>, fill it in, then upload it here with your order.</p>
             <input type="file" name="file" accept=".csv,.xls,.xlsx,.pdf,.numbers" class="type-body-md" style="font-family:var(--font-body);" />
           </div>
-          <p class="type-caption" style="margin:24px 0 0; color:var(--accent); opacity:0.6;">Your manifest is used only to price and prepare your order — never anything more.</p>
+          <p class="type-caption" style="margin:24px 0 0; color:var(--accent); opacity:0.6;">Your manifest is used only to price and prepare your order, never anything more.</p>
           <div style="margin-top:30px;">
             <button type="submit" class="luxury-btn luxury-btn--solid luxury-btn--md">Submit Manifest</button>
           </div>
@@ -111,7 +112,7 @@ const jsonLd = [
 
         <div data-contact-success hidden style="border:0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); padding:50px;">
           <span class="type-eyebrow" style="display:block; color:var(--accent);">Manifest received</span>
-          <h3 class="type-h3" style="margin:15px 0 0;">Thank you — procurement has your manifest.</h3>
+          <h3 class="type-h3" style="margin:15px 0 0;">Thank you. Procurement has your manifest.</h3>
           <p class="type-body-md" style="margin:15px 0 0; opacity:0.78; max-width:48ch;">We will price, source and return a confirmed quote shortly. For a vessel departing soon, reach procurement directly on +62 811 3821 0187.</p>
           <div style="margin-top:30px;">
             <button type="button" class="luxury-btn luxury-btn--ghost luxury-btn--md" data-contact-reset>Submit Another</button>
@@ -181,7 +182,7 @@ const jsonLd = [
         try {
           await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
         } catch {
-          /* swallow — still confirm; provider may also redirect */
+          /* swallow, still confirm; provider may also redirect */
         }
       }
       showSuccess();

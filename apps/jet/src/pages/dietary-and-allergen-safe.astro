@@ -1,0 +1,175 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import ImagePlate from "@bali/ui/components/ImagePlate.astro";
+import SisterBrands from "@bali/ui/components/SisterBrands.astro";
+import { jet, jetGeo } from "../brand";
+import { img } from "../lib/images";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Bali Jet Catering — Specialized & Allergen-Safe Inflight Catering",
+    serviceType: "Specialized dietary and allergen-safe private jet catering",
+    description:
+      "HACCP-controlled specialized dietary and allergen-safe inflight catering for private aviation: halal, vegan, keto, gluten-free, low-sodium and medical diets, prepared with segregated handling and per-passenger labelling.",
+    url: "https://balijetcatering.com/dietary-and-allergen-safe",
+    areaServed: "Bali Ngurah Rai (DPS / WADD)",
+    provider: { "@type": "FoodEstablishment", name: "Bali Jet Catering", url: "https://balijetcatering.com" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Can you guarantee allergen-safe preparation?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We prepare allergen-sensitive orders under HACCP control with segregated stations, dedicated utensils and per-passenger labelling. Share the specific allergens on the manifest and we build the service around them.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Which specialized diets do you cater for?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Halal, kosher-style, vegan, vegetarian, pescatarian, keto, paleo, gluten-free, dairy-free, low-sodium and clinical or medical diets, each composed without compromise to presentation.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How much notice do you need for a medical diet?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Medical and complex allergen diets are best confirmed 24 hours ahead so our chefs can source and validate every ingredient. We regularly accommodate shorter notice where sourcing allows.",
+        },
+      },
+    ],
+  },
+];
+---
+
+<PageLayout
+  brand={jet}
+  current="specialized"
+  title="Specialized & Allergen-Safe Inflight Catering | Bali Jet Catering"
+  description="HACCP-controlled specialized dietary and allergen-safe private jet catering in Bali: halal, vegan, keto, gluten-free, low-sodium and medical diets, with segregated handling and per-passenger labelling."
+  canonical="https://balijetcatering.com/dietary-and-allergen-safe"
+  geo={jetGeo}
+  jsonLd={jsonLd}
+>
+  <section class="jc-hero section-tone--dark" data-screen-label="Jet · Specialized & Allergen-Safe" style="min-height:74vh;">
+    <ImagePlate hero image={img("jet-allergen-safe-plating-hero")} caption="HACCP-controlled kitchen / allergen-safe plating" />
+    <div class="jc-hero__scrim"></div>
+    <div class="jc-hero__inner">
+      <div class="jc-hero__col">
+        <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Specialized & Allergen-Safe · Dietary Programs</span>
+        <h1 class="type-h1" style="font-size:clamp(38px,5vw,62px); line-height:1.05; max-width:18ch;">Specialized & Allergen-Safe Inflight Catering</h1>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:60ch;">Every dietary requirement, accounted for and prepared under HACCP control, so the cabin crew can serve with total confidence at altitude.</p>
+        <div style="display:flex; gap:20px; margin-top:50px; flex-wrap:wrap;">
+          <a class="luxury-btn luxury-btn--solid luxury-btn--md" href="/contact#contact">Request a Quote</a>
+          <a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/airside-operations#food-safety">Our Food Safety</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dietary-program" class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Dietary Programs for the Executive Cabin</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:22ch;">Composed without compromise to presentation</h2>
+    <p class="type-body-lg" style="margin:30px 0 50px; max-width:64ch;">Specialized does not mean plain. Every diet below is built to the same standard as the à la carte menu, plated to hold from climb to descent.</p>
+    <div class="jc-list">
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Halal & Faith-Based</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Certified halal sourcing and separate preparation, with kosher-style and other faith-based requirements accommodated on request.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Plant-Based</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Vegan, vegetarian and pescatarian menus with the same multi-course structure, from canapés to patisserie.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Low-Carb & Performance</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Keto, paleo and macro-controlled plates for passengers travelling on a specific nutrition or performance protocol.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Free-From</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Gluten-free, dairy-free, nut-free and low-sodium menus, each cross-checked against the passenger manifest.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Medical & Clinical</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Renal, diabetic and other clinical diets prepared to a specification you provide, ingredient by ingredient.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Infant & Children</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Age-appropriate menus and purées, packed and labelled for their own service window alongside the main cabin.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--tint Section">
+    <div class="jc-split">
+      <ImagePlate image={img("jet-menus-plate3")} caption="Segregated prep / per-passenger labelling" ratio="4 / 3" />
+      <div class="jc-split--text">
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">HACCP Control & Allergen Safety</span>
+        <h2 class="type-h2" style="margin:20px 0 0;">Segregated handling, labelled per passenger</h2>
+        <p class="type-body-md" style="margin:30px 0 0;">Allergen-sensitive orders are prepared at dedicated stations with separate utensils, then sealed and labelled to the individual passenger. Every order is cross-checked against the manifest before it leaves the kitchen, so the crew serves each seat with confidence.</p>
+        <div style="margin-top:40px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/contact#contact">Build a Manifest</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">How We Handle Specialized Requests</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:24ch;">A clear protocol, every flight</h2>
+    <div class="luxury-card-grid" style="--cols:3; margin-top:50px;">
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Manifest Review</h3>
+        <p class="luxury-card__body">Diets, allergens and preferences are captured per passenger and confirmed with your dispatcher before we source.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/contact#contact">Enquire</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Segregated Preparation</h3>
+        <p class="luxury-card__body">Dedicated stations, utensils and storage under HACCP control keep allergens fully separated end to end.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/airside-operations#food-safety">Food Safety</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Labelled & Sealed</h3>
+        <p class="luxury-card__body">Each plate is labelled to the seat and sealed for the cabin, so service is precise and the crew is never guessing.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/contact#contact">Request</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-tone--dark Section" style="text-align:center;">
+    <span class="type-eyebrow" style="display:block; opacity:0.82;">No Compromise</span>
+    <h2 class="type-h2" style="font-size:clamp(28px,4vw,46px); line-height:1.12; max-width:26ch; margin:30px auto 0;">Every requirement met, without compromise to the plate.</h2>
+    <p class="type-body-lg" style="opacity:0.82; max-width:58ch; margin:30px auto 0;">Send us the manifest and the requirements. Our chefs handle the rest, from sourcing to sealed, labelled service.</p>
+    <div style="margin-top:50px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/contact#contact">Request a Quote</a></div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Answers</span>
+    <h2 class="type-h2" style="margin:20px 0 40px;">Specialized catering questions</h2>
+    <div class="jc-faq">
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Can you guarantee allergen-safe preparation?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">We prepare allergen-sensitive orders under HACCP control with segregated stations, dedicated utensils and per-passenger labelling. Share the specific allergens on the manifest and we build the service around them.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Which specialized diets do you cater for?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Halal, kosher-style, vegan, vegetarian, pescatarian, keto, paleo, gluten-free, dairy-free, low-sodium and clinical or medical diets, each composed without compromise to presentation.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">How much notice do you need for a medical diet?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Medical and complex allergen diets are best confirmed 24 hours ahead so our chefs can source and validate every ingredient. We regularly accommodate shorter notice where sourcing allows.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <SisterBrands
+    current="jet"
+    heading="Operating on the water?"
+    intro="Catering or provisioning a yacht or superyacht in Bali? Our sister brands deliver the same standard dockside."
+  />
+</PageLayout>

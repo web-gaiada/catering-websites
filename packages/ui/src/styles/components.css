@@ -172,6 +172,23 @@ a:hover .luxury-icon { opacity: 1; }
 .luxury-card__actions {
   margin-top: var(--space-30);       /* description → small button = 30px */
 }
+/* cards that carry a media plate get rounded corners and clip the full-bleed
+   image to them (text-only cards stay square per the system default) */
+.luxury-card:has(.luxury-card__media) {
+  border-radius: var(--radius-plate);
+  overflow: hidden;
+}
+/* full-bleed media at the top of a card — bleeds past the card padding to fill
+   the card edge-to-edge; squared here (beats .jc-plate) so the card's own
+   rounded clip is what shapes the top corners, leaving no corner gaps */
+.luxury-card .luxury-card__media {
+  width: auto;   /* override .jc-plate's explicit 100% so negative margins stretch it edge-to-edge */
+  margin: calc(var(--card-padding) * -1) calc(var(--card-padding) * -1) var(--space-20);
+  border-radius: 0;
+}
+@media (max-width: 640px) {
+  .luxury-card__actions .luxury-btn { width: 100%; }   /* full-width card CTA on small screens */
+}
 
 /* card grid — gaps of 20px, terminates at 1340px */
 .luxury-card-grid {
@@ -426,6 +443,94 @@ a:hover .luxury-icon { opacity: 1; }
 /* Social icon sits at full opacity to match the nav links (not the muted 60%). */
 .luxury-header__actions .luxury-icon { opacity: 1; }
 
+/* ---------------------------------------------------------------------
+   DROPDOWN NAV (desktop) — opt-in per brand via NavItem.children.
+   Closed by default; the parent <button> click-toggles `.is-open` (see the
+   Header client script). Flat nav items are untouched.
+   --------------------------------------------------------------------- */
+.luxury-header__navitem { position: relative; display: flex; align-items: center; height: 100%; }
+/* The dropdown parent is a <button> (toggle, not a link) — strip UA chrome and
+   re-assert the nav font (buttons don't inherit it) so it renders identically
+   to the sibling nav links. */
+.luxury-header__link--menu {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-10);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: var(--font-body);
+  font-size: var(--body-sm-size);
+  line-height: var(--body-sm-line);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--track-normal);
+}
+/* Chevron — a rotated corner that inherits the link's current color. */
+.luxury-header__caret {
+  width: 6px;
+  height: 6px;
+  border-right: var(--hairline-strong) solid currentColor;
+  border-bottom: var(--hairline-strong) solid currentColor;
+  transform: rotate(45deg) translate(-1px, -2px);
+  transition: transform var(--dur-base) var(--ease-luxury);
+}
+.luxury-header__navitem--menu.is-open .luxury-header__caret { transform: rotate(45deg) translate(-1px, 0); }
+/* Keep the parent's underline lit while the panel is open. */
+.luxury-header__navitem--menu.is-open .luxury-header__link:not([aria-current="page"])::after {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+/* Panel — solid off-white plate (readable over both header states). */
+.luxury-header__submenu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 248px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  padding: var(--space-30) var(--space-30);
+  background-color: var(--brand-color-bg);
+  border: var(--hairline-strong) solid color-mix(in srgb, var(--text-primary) 8%, transparent);
+  box-shadow: var(--shadow-header);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-luxury),
+              transform var(--dur-base) var(--ease-luxury),
+              visibility var(--dur-base) var(--ease-luxury);
+  z-index: 120;
+}
+.luxury-header__navitem--menu.is-open .luxury-header__submenu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.luxury-header__submenu-link {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--body-sm-size);
+  line-height: var(--body-sm-line);
+  letter-spacing: var(--track-normal);
+  text-decoration: none;
+  color: var(--brand-color-text-dark);   /* solid panel → always dark text */
+  white-space: nowrap;
+  opacity: 0.82;
+  transition: opacity var(--dur-base) var(--ease-luxury), color var(--dur-base) var(--ease-luxury);
+}
+.luxury-header__submenu-link:hover { opacity: 1; }
+.luxury-header__submenu-link[aria-current="page"] {
+  font-weight: var(--weight-bold);
+  color: var(--brand-color-secondary);
+  opacity: 1;
+}
+
 /* Narrower desktops (~1280): the longest wordmark ("Bali Yacht Provisioning")
    crowds the centered nav. Tighten the wordmark tracking + nav rhythm in this
    band so the title clears the menu. Below 1025px the nav collapses to the
@@ -556,6 +661,59 @@ a:hover .luxury-icon { opacity: 1; }
   white-space: nowrap;
 }
 .luxury-nav-drawer__link[aria-current="page"] { font-weight: var(--weight-bold); color: var(--brand-color-secondary); }
+/* Dropdown group in the drawer: a label button that toggles its indented
+   pages. Sublinks are hidden until the group is opened, then expand/collapse
+   with a smooth height + fade animation. */
+.luxury-nav-drawer__group { display: flex; flex-direction: column; }
+.luxury-nav-drawer__grouplabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-10);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--body-md-size);
+  line-height: var(--body-md-line);
+  text-decoration: none;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.luxury-nav-drawer__caret {
+  width: 7px;
+  height: 7px;
+  border-right: var(--hairline-strong) solid currentColor;
+  border-bottom: var(--hairline-strong) solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--dur-base) var(--ease-luxury);
+}
+.luxury-nav-drawer__group.is-open .luxury-nav-drawer__caret { transform: rotate(-135deg) translate(-2px, 1px); }
+/* Collapsed until the group is toggled open. The grid-rows 0fr→1fr trick
+   animates the true auto-height; the inner element clips the overflow. */
+.luxury-nav-drawer__sublinks {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--dur-base) var(--ease-luxury),
+              opacity var(--dur-base) var(--ease-luxury);
+}
+.luxury-nav-drawer__group.is-open .luxury-nav-drawer__sublinks {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.luxury-nav-drawer__sublinks-inner {
+  overflow: hidden;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  padding-left: var(--space-20);
+  padding-top: var(--space-20);   /* label → first sublink; collapses with the group */
+}
 .luxury-nav-drawer__actions { margin-top: var(--space-40); }
 .luxury-nav-drawer__actions .luxury-btn { width: 100%; }
 /* Social icon row under the drawer CTA (mobile counterpart to the header bar). */
@@ -759,7 +917,10 @@ a:hover .luxury-icon { opacity: 1; }
    --layout-gutter; text is flex-centered in the area below the 80px header
    so the gap above and below is mathematically identical.
    ===================================================================== */
-html { scroll-behavior: smooth; }   /* cinematic document scroll */
+html {
+  scroll-behavior: smooth;                               /* cinematic document scroll */
+  scroll-padding-top: calc(var(--header-height) + 20px); /* anchor jumps clear the fixed navbar */
+}
 
 .luxury-hero {
   position: sticky;

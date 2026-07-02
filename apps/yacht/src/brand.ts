@@ -1,19 +1,19 @@
 import type { Brand } from "@bali/ui/brand";
 import { SITE_URLS } from "@bali/ui/site-urls";
 
-/** Bali Yacht Catering — baliyachtcatering.com */
+/** Bali Yacht Catering | baliyachtcatering.com */
 export const yacht: Brand = {
   key: "yacht",
   name: "Bali Yacht Catering",
   domain: "baliyachtcatering.com",
   nav: [
     { key: "menus", label: "Cruise & Event Menus", href: "/menus" },
-    { key: "chefs", label: "Onboard Chefs", href: "/onboard-chefs" },
+    { key: "chefs", label: "Onboard Chefs & Mixologist", href: "/onboard-chefs" },
     { key: "booking", label: "Booking", href: "/booking" },
     { key: "insights", label: "Insights", href: "/insights" },
   ],
-  cta: { label: "Request a Quote", href: "/booking" },
-  social: [{ label: "Facebook", href: "#", icon: "facebook" }],
+  cta: { label: "Request a Quote", href: "/booking#book-luxury-yacht" },
+  social: [{ label: "LinkedIn", href: "#", icon: "linkedin" }],
   whatsapp: "6281138210187",
   footer: {
     columns: [

@@ -1,0 +1,38 @@
+---
+import ArticleLayout from "@bali/ui/components/ArticleLayout.astro";
+import { yacht, yachtGeo } from "../../brand";
+import { articles } from "../../articles";
+import { img } from "../../lib/images";
+
+export function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const related = articles
+  .filter((a) => a.slug !== article.slug)
+  .map((a) => ({
+    slug: a.slug,
+    title: a.title,
+    category: a.category,
+    readTime: a.readTime,
+    excerpt: a.excerpt,
+    image: img(a.imageSlot),
+    ratio: "3 / 2",
+  }));
+---
+<ArticleLayout
+  brand={yacht}
+  article={article}
+  image={img(article.imageSlot)}
+  geo={yachtGeo}
+  cta={{ heading: "Planning a charter or a celebration at sea? We will shape the menu around your day." }}
+  sister={{
+    heading: "Flying private or running a superyacht?",
+    intro: "Our sister brands deliver the same standard in the air and at the dock, from private jet catering to full superyacht provisioning.",
+  }}
+  related={related}
+/>

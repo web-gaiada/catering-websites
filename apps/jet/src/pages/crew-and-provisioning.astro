@@ -1,0 +1,175 @@
+---
+import PageLayout from "@bali/ui/components/PageLayout.astro";
+import ImagePlate from "@bali/ui/components/ImagePlate.astro";
+import SisterBrands from "@bali/ui/components/SisterBrands.astro";
+import { jet, jetGeo } from "../brand";
+import { img } from "../lib/images";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Bali Jet Catering — Crew, Cabin & Provisioning",
+    serviceType: "Crew meals, galley restock and cabin provisioning for private aviation",
+    description:
+      "Crew meals, galley restock, fine wines, water, soft beverages and cabin amenities for private jets out of Bali, delivered flight-ready in a single manifest with the cold chain intact.",
+    url: "https://balijetcatering.com/crew-and-provisioning",
+    areaServed: "Bali Ngurah Rai (DPS / WADD)",
+    provider: { "@type": "FoodEstablishment", name: "Bali Jet Catering", url: "https://balijetcatering.com" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Can you cater crew and passengers separately?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. We prepare distinct passenger, children and crew manifests, each labelled and packed for its own service window, so the galley stays organised through the flight.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you handle full galley restock and amenities?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We restock the galley end to end: meals, snacks, fine wines, water, soft beverages, barista-grade coffee, ice, and cabin amenities, all consolidated into one delivery to the aircraft.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How is provisioning delivered to the aircraft?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Everything arrives flight-ready in a single manifest, temperature-controlled and cleared for airside delivery to the FBO, coordinated directly with your handler and dispatcher.",
+        },
+      },
+    ],
+  },
+];
+---
+
+<PageLayout
+  brand={jet}
+  current="crew"
+  title="Crew Meals, Cabin Provisioning & Galley Restock | Bali Jet Catering"
+  description="Crew meals, galley restock, fine wines, water and cabin amenities for private jets out of Bali. A complete cabin provision delivered flight-ready in one manifest, cold chain intact."
+  canonical="https://balijetcatering.com/crew-and-provisioning"
+  geo={jetGeo}
+  jsonLd={jsonLd}
+>
+  <section class="jc-hero section-tone--dark" data-screen-label="Jet · Crew, Cabin & Provisioning" style="min-height:74vh;">
+    <ImagePlate hero image={img("jet-cabin-provisioning")} caption="Galley restock / cabin provisioning" />
+    <div class="jc-hero__scrim"></div>
+    <div class="jc-hero__inner">
+      <div class="jc-hero__col">
+        <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Crew, Cabin & Provisioning · Complete Cabin Provision</span>
+        <h1 class="type-h1" style="font-size:clamp(38px,5vw,62px); line-height:1.05; max-width:18ch;">Crew Meals, Cabin Provisioning & Galley Restock</h1>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:60ch;">Crew meals, galley restock, fine wines, water and amenities, a complete cabin provision delivered flight-ready in one manifest.</p>
+        <div style="display:flex; gap:20px; margin-top:50px; flex-wrap:wrap;">
+          <a class="luxury-btn luxury-btn--solid luxury-btn--md" href="/contact#contact">Request a Quote</a>
+          <a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/airside-operations">Airside Operations</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="complete-cabin-provision" class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">A Complete Cabin Provision, One Manifest</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:22ch;">Everything the cabin needs, delivered together</h2>
+    <p class="type-body-lg" style="margin:30px 0 50px; max-width:64ch;">From the flight deck to the last row, we provision the whole aircraft in a single, consolidated delivery, so nothing is the variable that holds a departure.</p>
+    <div class="jc-list">
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Crew Meals</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Hot and cold crew meals composed for long duty days, packed and labelled separately from the passenger service.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Galley Restock</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Snacks, dry goods, condiments, ice and consumables replenished to your standing galley specification.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Cellar & Beverages</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Fine wines, Champagne, spirits, water, soft beverages and barista-grade coffee, subject to local regulation.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Cabin Amenities</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Linens, tableware, glassware and finishing touches sourced to match the standard of the cabin.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Fresh Provisions</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">Fruit, dairy and fresh produce sourced the same day and packed to hold the cold chain to the aircraft.</p>
+      </div>
+      <div class="jc-list__row">
+        <span class="type-h3" style="font-size:20px;">Bespoke Requests</span>
+        <p class="type-body-md" style="opacity:0.78; margin:0;">A specific brand, a hard-to-source item or a standing preference: put it on the manifest and we will find it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--tint Section">
+    <div class="jc-split">
+      <ImagePlate image={img("jet-menus-plate2")} caption="Consolidated manifest / cold-chain packing" ratio="4 / 3" />
+      <div class="jc-split--text">
+        <span class="type-eyebrow" style="display:block; color:var(--accent);">One Manifest, Flight-Ready</span>
+        <h2 class="type-h2" style="margin:20px 0 0;">Consolidated, cleared and stowed</h2>
+        <p class="type-body-md" style="margin:30px 0 0;">We consolidate the entire order into one manifest, temperature-controlled and customs-cleared, then deliver airside to the FBO in coordination with your handler. It arrives flight-ready and stows without a single point of friction on the ground.</p>
+        <div style="margin-top:40px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/contact#contact">Build a Manifest</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">How We Provision</span>
+    <h2 class="type-h2" style="margin:20px 0 0; max-width:24ch;">Reliable to the berth and the gate</h2>
+    <div class="luxury-card-grid" style="--cols:3; margin-top:50px;">
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Standing Manifests</h3>
+        <p class="luxury-card__body">Keep a standing galley and amenity specification on file, so each restock is fast, exact and repeatable.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/contact#contact">Set One Up</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Cold Chain Intact</h3>
+        <p class="luxury-card__body">Temperature-controlled packing and handling hold the cold chain from our kitchen to the passerelle.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/airside-operations">Logistics</a></div>
+      </article>
+      <article class="luxury-card">
+        <h3 class="luxury-card__title">Airside Delivery</h3>
+        <p class="luxury-card__body">Customs-cleared, scheduled and delivered to the FBO in step with your handler and dispatcher.</p>
+        <div class="luxury-card__actions"><a class="luxury-btn luxury-btn--ghost luxury-btn--sm" href="/contact#contact">Enquire</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-tone--dark Section" style="text-align:center;">
+    <span class="type-eyebrow" style="display:block; opacity:0.82;">One Delivery</span>
+    <h2 class="type-h2" style="font-size:clamp(28px,4vw,46px); line-height:1.12; max-width:26ch; margin:30px auto 0;">The whole cabin provisioned, cleared and stowed on schedule.</h2>
+    <p class="type-body-lg" style="opacity:0.82; max-width:58ch; margin:30px auto 0;">Passenger service, crew meals and galley restock, consolidated into one manifest and delivered flight-ready.</p>
+    <div style="margin-top:50px;"><a class="luxury-btn luxury-btn--ghost luxury-btn--md" href="/contact#contact">Request a Quote</a></div>
+  </section>
+
+  <section class="section-tone--paper Section">
+    <span class="type-eyebrow" style="display:block; color:var(--accent);">Answers</span>
+    <h2 class="type-h2" style="margin:20px 0 40px;">Provisioning questions</h2>
+    <div class="jc-faq">
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Can you cater crew and passengers separately?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Yes. We prepare distinct passenger, children and crew manifests, each labelled and packed for its own service window, so the galley stays organised through the flight.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">Do you handle full galley restock and amenities?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">We restock the galley end to end: meals, snacks, fine wines, water, soft beverages, barista-grade coffee, ice, and cabin amenities, all consolidated into one delivery to the aircraft.</p></div>
+      </details>
+      <details name="jc-faq">
+        <summary><span class="type-h3" style="font-size:21px; line-height:1.3;">How is provisioning delivered to the aircraft?</span></summary>
+        <div class="jc-faq__a"><p class="type-body-md" style="opacity:0.78;">Everything arrives flight-ready in a single manifest, temperature-controlled and cleared for airside delivery to the FBO, coordinated directly with your handler and dispatcher.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <SisterBrands
+    current="jet"
+    heading="Operating on the water?"
+    intro="Catering or provisioning a yacht or superyacht in Bali? Our sister brands deliver the same standard dockside."
+  />
+</PageLayout>

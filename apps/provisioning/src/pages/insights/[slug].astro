@@ -1,0 +1,38 @@
+---
+import ArticleLayout from "@bali/ui/components/ArticleLayout.astro";
+import { provisioning, provGeo } from "../../brand";
+import { articles } from "../../articles";
+import { img } from "../../lib/images";
+
+export function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const related = articles
+  .filter((a) => a.slug !== article.slug)
+  .map((a) => ({
+    slug: a.slug,
+    title: a.title,
+    category: a.category,
+    readTime: a.readTime,
+    excerpt: a.excerpt,
+    image: img(a.imageSlot),
+    ratio: "3 / 2",
+  }));
+---
+<ArticleLayout
+  brand={provisioning}
+  article={article}
+  image={img(article.imageSlot)}
+  geo={provGeo}
+  cta={{ heading: "Have a manifest to fill? Send the list and we will price, source and confirm." }}
+  sister={{
+    heading: "Catering by air or by charter?",
+    intro: "Our sister brands deliver the same standard for private aviation and yacht charter dining in Bali.",
+  }}
+  related={related}
+/>

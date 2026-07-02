@@ -5,14 +5,14 @@ import SisterBrands from "@bali/ui/components/SisterBrands.astro";
 import { yacht, yachtGeo } from "../brand";
 import { img } from "../lib/images";
 
-// Booking form destination — see the inline script at the bottom of this page.
+// Booking form destination; see the inline script at the bottom of this page.
 const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
 
 const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    name: "Booking & Inquiries — Bali Yacht Catering",
+    name: "Booking & Inquiries | Bali Yacht Catering",
     url: "https://baliyachtcatering.com/booking",
     description: "Request a customized yacht catering quote for a charter or private ocean event in Bali.",
     mainEntity: {
@@ -49,12 +49,12 @@ const jsonLd = [
       <div class="jc-hero__col">
         <span class="type-eyebrow" style="display:block; margin-bottom:30px; opacity:0.82;">Booking & Inquiries</span>
         <h1 class="type-h1" style="font-size:clamp(38px,5vw,60px); line-height:1.05; max-width:20ch;">Book Your Luxury Yacht Catering Experience</h1>
-        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:60ch;">Tell us about your charter and we will design the menu and crew to match — with fast, clear quotes for private guests and charter agencies alike.</p>
+        <p class="type-body-lg" style="opacity:0.84; margin-top:30px; max-width:60ch;">Tell us about your charter and we will design the menu and crew to match, with fast, clear quotes for private guests and charter agencies alike.</p>
       </div>
     </div>
   </section>
 
-  <section class="section-tone--paper Section">
+  <section id="book-luxury-yacht" class="section-tone--paper Section">
     <div class="jc-contact">
       <div>
         <span class="type-eyebrow" style="display:block; color:var(--accent);">Customize Your Marine Event Menu</span>
@@ -103,7 +103,7 @@ const jsonLd = [
             <textarea id="f-event" class="luxury-field__input" name="event" placeholder=" " required rows="4" style="resize:vertical;"></textarea>
             <label for="f-event" class="luxury-field__label">Tell us about your event</label>
           </div>
-          <p class="type-caption" style="margin:20px 0 0; color:var(--accent); opacity:0.6;">We will only use these details to prepare your quote — never anything more.</p>
+          <p class="type-caption" style="margin:20px 0 0; color:var(--accent); opacity:0.6;">We will only use these details to prepare your quote, never anything more.</p>
           <div style="margin-top:30px;">
             <button type="submit" class="luxury-btn luxury-btn--solid luxury-btn--md">Request a Quote</button>
           </div>
@@ -111,7 +111,7 @@ const jsonLd = [
 
         <div data-contact-success hidden style="border:0.5px solid color-mix(in srgb, var(--hairline) 18%, transparent); padding:50px;">
           <span class="type-eyebrow" style="display:block; color:var(--accent);">Inquiry received</span>
-          <h3 class="type-h3" style="margin:15px 0 0;">Thank you — we have your charter details.</h3>
+          <h3 class="type-h3" style="margin:15px 0 0;">Thank you. We have your charter details.</h3>
           <p class="type-body-md" style="margin:15px 0 0; opacity:0.78; max-width:48ch;">A coordinator will reply with a tailored menu and quote shortly. For a charter departing soon, message us directly on +62 811 3821 0187.</p>
           <div style="margin-top:30px;">
             <button type="button" class="luxury-btn luxury-btn--ghost luxury-btn--md" data-contact-reset>Submit Another</button>
@@ -184,7 +184,7 @@ const jsonLd = [
             headers: { Accept: "application/json" },
           });
         } catch {
-          /* swallow — still confirm; provider may also redirect */
+          /* swallow; still confirm; provider may also redirect */
         }
       }
       showSuccess();
